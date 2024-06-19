@@ -1,0 +1,8 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs/NVP_Libs/FileContentIndex
+/.vs/NVP_Libs/v17
+/.vs
+/NVP_Libs/.vs/NVP_Libs
