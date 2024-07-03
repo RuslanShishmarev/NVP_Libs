@@ -1,37 +1,28 @@
 ﻿using NVP.API.Nodes;
-using OfficeOpenXml;
+
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text.RegularExpressions;
 
-namespace NVP_Libs
+namespace NVP_Libs.Common
 {
-    [NodeInput("link", typeof(string))]
+    [NodeInput("Полный путь до файла", typeof(string))]
+
     public class ExcelParce : IRevitNode
     {
         public NodeResult Execute(IVisualViewerData context, List<NodeResult> inputs, object commandData)
         {
-            var link = (string)inputs[0].Value;
-            FileInfo fileInfo = new FileInfo(link);
-
-            using (ExcelPackage package = new ExcelPackage(fileInfo))
+            string link = (string)inputs[0].Value;
+            string fileContent = File.ReadAllText(link);
+            string[] rows = fileContent.Split('\n');
+            List<List<string>> data = new List<List<string>>();
+            foreach (string row in rows)
             {
-                ExcelWorksheet worksheet = package.Workbook.Worksheets[0];
-                int rowCount = worksheet.Dimension.Rows;
-                int colCount = worksheet.Dimension.Columns;
-                string[][] data = new string[rowCount][];
-
-                for (int i = 1; i <= rowCount; i++)
-                {
-                    data[i - 1] = new string[colCount];
-                    for (int j = 1; j <= colCount; j++)
-                    {
-                        data[i - 1][j - 1] = worksheet.Cells[i, j].Value?.ToString();
-                    }
-                }
-
-                return new NodeResult(data);
+                string[] cells = Regex.Split(row, @"\t");
+                data.Add(new List<string>(cells));
             }
+            return new NodeResult(data);
         }
     }
 }

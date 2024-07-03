@@ -1,18 +1,23 @@
 ﻿using NVP.API.Nodes;
+
+using Serilog;
+
+using Excel = Microsoft.Office.Interop.Excel;
+
 using System;
 using System.Collections.Generic;
 using System.IO;
-using OfficeOpenXml;
-using System.Linq;
-using Serilog; 
+using System.Reflection;
 
-namespace NVP_Libs
+
+
+namespace NVP_Libs.Common
 {
-    [NodeInput("FileName", typeof(string))]
-    [NodeInput("Text", typeof(string))]
-    [NodeInput("Cell", typeof(string))]
-    [NodeInput("NameOfSheet", typeof(string))]
-    public class ExcelZapis : IRevitNode
+    [NodeInput("Полный путь", typeof(string))]
+    [NodeInput("Текст который вводим", typeof(string))]
+    [NodeInput("Клетка", typeof(string))]
+    [NodeInput("Имя Листа", typeof(string))]
+    public class ExcelSingleWrite : IRevitNode
     {
         public NodeResult Execute(IVisualViewerData context, List<NodeResult> inputs, object commandData)
         {
@@ -22,24 +27,29 @@ namespace NVP_Libs
             string nameofSheet = (string)inputs[3].Value;
 
             try
-            { 
+            {
                 if (!File.Exists(fileName))
                 {
                     Log.Error($"File {fileName} does not exist.");
                     return new NodeResult("Файл не существует.");
                 }
-                using (var package = new ExcelPackage(new FileInfo(fileName)))
-                {
-                    var worksheet = package.Workbook.Worksheets[nameofSheet];
-                    if (worksheet == null)
-                    {
-                        Log.Error($"Sheet {nameofSheet} does not exist in file {fileName}.");
-                        return new NodeResult($"Лист {nameofSheet} не существует в файле {fileName}.");
-                    }
-                    worksheet.Cells[cell].Value = text;
 
-                    package.Save();
+                Excel.Application excelApp = new Excel.Application();
+                Excel.Workbook workbook = excelApp.Workbooks.Open(fileName);
+                Excel.Worksheet worksheet = workbook.Sheets[nameofSheet];
+
+                if (worksheet == null)
+                {
+                    Log.Error($"Sheet {nameofSheet} does not exist in file {fileName}.");
+                    return new NodeResult($"Лист {nameofSheet} не существует в файле {fileName}.");
                 }
+
+                worksheet.Range[cell].Value2 = text;
+
+                workbook.Save();
+                workbook.Close();
+                excelApp.Quit();
+
                 return new NodeResult("Данные успешно записаны в Excel файл.");
             }
             catch (Exception ex)
@@ -50,4 +60,3 @@ namespace NVP_Libs
         }
     }
 }
-
