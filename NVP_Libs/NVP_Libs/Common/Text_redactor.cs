@@ -6,8 +6,8 @@ using System.IO;
 
 namespace NVP_Libs.Common
 {
-    [NodeInput("Полный путь до файла", typeof(string))]
-    [NodeInput("Текст", typeof(string))]
+    [NodeInput("полный путь до файла", typeof(string))]
+    [NodeInput("текст", typeof(string))]
 
     public class Text_redactor : IRevitNode
     {
@@ -27,7 +27,7 @@ namespace NVP_Libs.Common
                 return new NodeResult("Файл не существует.");
             }
 
-            return new NodeResult("Файл успешно отредактирован.");
+            return new NodeResult(link);
         }
     }
 }

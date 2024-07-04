@@ -2,7 +2,6 @@
 
 using OfficeOpenXml;
 
-using Serilog;
 
 using System;
 using System.Collections.Generic;
@@ -11,12 +10,12 @@ using System.Linq;
 
 namespace NVP_Libs.Common
 {
-    [NodeInput("Полный путь", typeof(string))]
-    [NodeInput("Массив значений", typeof(object[]))]
-    [NodeInput("Клетка", typeof(string))]
-    [NodeInput("Имя Листа", typeof(string))]
+    [NodeInput("полный путь", typeof(string))]
+    [NodeInput("массив значений", typeof(object[]))]
+    [NodeInput("клетка", typeof(string))]
+    [NodeInput("имя листа", typeof(string))]
 
-    public class TESTSS : IRevitNode
+    public class Writing_array_excel_EPPlus : IRevitNode
     {
         public NodeResult Execute(IVisualViewerData context, List<NodeResult> inputs, object commandData)
         {
@@ -31,14 +30,12 @@ namespace NVP_Libs.Common
                 // Проверяем, что fileName задан
                 if (string.IsNullOrEmpty(fileName))
                 {
-                    Log.Error("Не указан полный путь к файлу Excel.");
                     return new NodeResult("Не указан полный путь к файлу Excel.");
                 }
 
                 // Проверяем, что values не пустой и не null
                 if (values == null || !values.Any())
                 {
-                    Log.Error("Пустой массив значений для записи в Excel.");
                     return new NodeResult("Пустой массив значений для записи в Excel.");
                 }
 
@@ -86,12 +83,10 @@ namespace NVP_Libs.Common
 
                 excelPackage.Dispose();
 
-                Log.Information($"Значения успешно записаны в файл Excel: {fileName}, Лист: {sheetName}, Клетка: {cell}");
                 return new NodeResult($"Значения успешно записаны в файл Excel: {fileName}, Лист: {sheetName}, Клетка: {cell}");
             }
             catch (Exception ex)
             {
-                Log.Error($"Ошибка при записи в файл Excel: {ex.Message}");
                 return new NodeResult($"Ошибка при записи в файл Excel: {ex.Message}");
             }
         }

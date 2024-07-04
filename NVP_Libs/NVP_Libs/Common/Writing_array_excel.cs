@@ -1,7 +1,5 @@
 ﻿using NVP.API.Nodes;
 
-using Serilog;
-
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -9,10 +7,10 @@ using System.Runtime.InteropServices;
 
 namespace NVP_Libs.Common
 {
-    [NodeInput("Полный путь", typeof(string))]
-    [NodeInput("Массив значений", typeof(object[]))]
-    [NodeInput("Клетка", typeof(string))]
-    [NodeInput("Имя Листа", typeof(string))]
+    [NodeInput("полный путь", typeof(string))]
+    [NodeInput("массив значений", typeof(object[]))]
+    [NodeInput("клетка", typeof(string))]
+    [NodeInput("имя листа", typeof(string))]
     public class Writing_array_excel : IRevitNode
     {
         public NodeResult Execute(IVisualViewerData context, List<NodeResult> inputs, object commandData)
@@ -28,7 +26,6 @@ namespace NVP_Libs.Common
                 // Проверяем, существует ли файл
                 if (!File.Exists(fileName))
                 {
-                    Log.Error($"File {fileName} does not exist.");
                     return new NodeResult("Файл не существует.");
                 }
 
@@ -77,11 +74,6 @@ namespace NVP_Libs.Common
                     // Сохраняем изменения в файле Excel
                     workbook.Save();
                 }
-                catch (Exception ex)
-                {
-                    Log.Error(ex, "Error during Excel operations.");
-                    throw;
-                }
                 finally
                 {
                     if (workbook != null)
@@ -102,20 +94,15 @@ namespace NVP_Libs.Common
             }
             catch (COMException ex)
             {
-                Log.Error(ex, "Error saving Excel file.");
-                Log.Error("Error code: " + ex.ErrorCode);
-                Log.Error("Error message: " + ex.Message);
+
                 return new NodeResult("Ошибка сохранения Excel файла.1" + "Error code: " + ex.ErrorCode + "Error message: " + ex.Message);
             }
             catch (IOException ex)
             {
-                Log.Error(ex, "Error writing to Excel file.");
                 return new NodeResult("Ошибка записи в Excel файла.2");
             }
             catch (Exception ex)
             {
-                Log.Error(ex, "Error saving Excel file.");
-                Log.Error("Error message: " + ex.Message);
                 return new NodeResult("Ошибка сохранения Excel файла.3" + "Error message: " + ex.Message);
             }
         }

@@ -1,22 +1,18 @@
 ﻿using NVP.API.Nodes;
 
-using Serilog;
 
 using Excel = Microsoft.Office.Interop.Excel;
 
-using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Reflection;
-
 
 
 namespace NVP_Libs.Common
 {
-    [NodeInput("Полный путь", typeof(string))]
-    [NodeInput("Текст который вводим", typeof(string))]
-    [NodeInput("Клетка", typeof(string))]
-    [NodeInput("Имя Листа", typeof(string))]
+    [NodeInput("полный путь", typeof(string))]
+    [NodeInput("текст который вводим", typeof(string))]
+    [NodeInput("клетка", typeof(string))]
+    [NodeInput("имя листа", typeof(string))]
     public class ExcelSingleWrite : IRevitNode
     {
         public NodeResult Execute(IVisualViewerData context, List<NodeResult> inputs, object commandData)
@@ -26,11 +22,9 @@ namespace NVP_Libs.Common
             string cell = (string)inputs[2].Value;
             string nameofSheet = (string)inputs[3].Value;
 
-            try
-            {
+
                 if (!File.Exists(fileName))
                 {
-                    Log.Error($"File {fileName} does not exist.");
                     return new NodeResult("Файл не существует.");
                 }
 
@@ -40,7 +34,6 @@ namespace NVP_Libs.Common
 
                 if (worksheet == null)
                 {
-                    Log.Error($"Sheet {nameofSheet} does not exist in file {fileName}.");
                     return new NodeResult($"Лист {nameofSheet} не существует в файле {fileName}.");
                 }
 
@@ -51,12 +44,7 @@ namespace NVP_Libs.Common
                 excelApp.Quit();
 
                 return new NodeResult("Данные успешно записаны в Excel файл.");
-            }
-            catch (Exception ex)
-            {
-                Log.Error(ex, "Error writing to Excel file.");
-                return new NodeResult("Ошибка записи в Excel файл.");
-            }
+
         }
     }
 }

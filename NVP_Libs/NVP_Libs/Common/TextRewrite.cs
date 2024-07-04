@@ -8,9 +8,9 @@ using System.IO;
 
 namespace NVP_Libs.Common
 {
-    [NodeInput("Полный путь", typeof(string))]
-    [NodeInput("Текст", typeof(string))]
-    [NodeInput("Перезапись", typeof(bool))]
+    [NodeInput("полный путь", typeof(string))]
+    [NodeInput("текст", typeof(string))]
+    [NodeInput("перезапись", typeof(bool))]
 
     public class TextRewrite : IRevitNode
     {
@@ -37,7 +37,7 @@ namespace NVP_Libs.Common
                 return new NodeResult("Файл не существует.");
             }
 
-            return new NodeResult("Файл успешно отредактирован.");
+            return new NodeResult(link);
         }
     }
 }
