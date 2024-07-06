@@ -5,9 +5,9 @@ namespace NVP_Libs
 {
     [NodeInput("номер 1", typeof(double))]
     [NodeInput("номер 2", typeof(double))]
-    public class ExampleRevit : IRevitNode
+    public class ExampleRevit : INode
     {
-        public NodeResult Execute(IVisualViewerData context, List<NodeResult> inputs, object commandData)
+        public NodeResult Execute(INVPData context, List<NodeResult> inputs)
         {
             var num1 = (double)inputs[0].Value;
             var num2 = (double)inputs[1].Value;

@@ -11,9 +11,9 @@ namespace NVP_Libs.Common
     [NodeInput("массив значений", typeof(object[]))]
     [NodeInput("клетка", typeof(string))]
     [NodeInput("имя листа", typeof(string))]
-    public class Writing_array_excel : IRevitNode
+    public class Writing_array_excel : INode
     {
-        public NodeResult Execute(IVisualViewerData context, List<NodeResult> inputs, object commandData)
+        public NodeResult Execute(INVPData context, List<NodeResult> inputs)
         {
             // Получаем входные параметры
             string fileName = (string)inputs[0].Value;
@@ -90,7 +90,7 @@ namespace NVP_Libs.Common
                     }
                 }
 
-                return new NodeResult("Данные успешно записаны в Excel файл.");
+                return new NodeResult(fileName);
             }
             catch (COMException ex)
             {

@@ -2,7 +2,6 @@
 
 using OfficeOpenXml;
 
-
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -15,10 +14,10 @@ namespace NVP_Libs.Common
     [NodeInput("клетка", typeof(string))]
     [NodeInput("имя листа", typeof(string))]
 
-    public class Writing_array_excel_EPPlus : IRevitNode
+    public class Writing_array_excel_EPPlus : INode
     {
-        public NodeResult Execute(IVisualViewerData context, List<NodeResult> inputs, object commandData)
-        {
+        public NodeResult Execute(INVPData context, List<NodeResult> inputs) 
+        { 
             try
             {
                 // Получаем входные параметры

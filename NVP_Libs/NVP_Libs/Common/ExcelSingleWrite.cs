@@ -1,11 +1,9 @@
 ﻿using NVP.API.Nodes;
 
-
 using Excel = Microsoft.Office.Interop.Excel;
 
 using System.Collections.Generic;
 using System.IO;
-
 
 namespace NVP_Libs.Common
 {
@@ -13,9 +11,9 @@ namespace NVP_Libs.Common
     [NodeInput("текст который вводим", typeof(string))]
     [NodeInput("клетка", typeof(string))]
     [NodeInput("имя листа", typeof(string))]
-    public class ExcelSingleWrite : IRevitNode
+    public class ExcelSingleWrite : INode
     {
-        public NodeResult Execute(IVisualViewerData context, List<NodeResult> inputs, object commandData)
+        public NodeResult Execute(INVPData context, List<NodeResult> inputs)
         {
             string fileName = (string)inputs[0].Value;
             string text = (string)inputs[1].Value;
@@ -43,7 +41,7 @@ namespace NVP_Libs.Common
                 workbook.Close();
                 excelApp.Quit();
 
-                return new NodeResult("Данные успешно записаны в Excel файл.");
+                return new NodeResult(fileName);
 
         }
     }

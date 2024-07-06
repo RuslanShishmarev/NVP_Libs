@@ -9,9 +9,9 @@ namespace NVP_Libs.Common
     [NodeInput("полный путь до файла", typeof(string))]
     [NodeInput("текст", typeof(string))]
 
-    public class Text_redactor : IRevitNode
+    public class Text_redactor : INode
     {
-        public NodeResult Execute(IVisualViewerData context, List<NodeResult> inputs, object commandData)
+        public NodeResult Execute(INVPData context, List<NodeResult> inputs)
         {
             string link = (string)inputs[0].Value;
             string text = (string)inputs[1].Value;
