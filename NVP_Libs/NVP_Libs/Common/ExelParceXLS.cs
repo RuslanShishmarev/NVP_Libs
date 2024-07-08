@@ -36,7 +36,6 @@ namespace NVP_Libs.Common
                         data.Add(rowData);
                     }
                     return new NodeResult(data);
-///стая птиц летит на прод///
                 }
             }
         }
