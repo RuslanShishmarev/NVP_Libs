@@ -9,11 +9,11 @@ using System.Linq;
 namespace NVP_Libs.Revit
 {
     [NodeInput("имя", typeof(string))]
-    public class GetLevelByName : IRevitNode
+    public class GetLevelByName : INode
     {
-        public NodeResult Execute(IVisualViewerData context, List<NodeResult> inputs, object commandData)
+        public NodeResult Execute(INVPData context, List<NodeResult> inputs)
         {
-            var doc = (commandData as ExternalCommandData).Application.ActiveUIDocument.Document;
+            var doc = (context.GetCADContext() as ExternalCommandData).Application.ActiveUIDocument.Document;
 
             var levelName = (string)inputs[0].Value;
 

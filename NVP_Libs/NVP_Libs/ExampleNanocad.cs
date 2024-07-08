@@ -7,7 +7,7 @@ namespace NVP_Libs
     [NodeInput("номер 2", typeof(double))]
     public class ExampleNanocad : INode
     {
-        public NodeResult Execute(IVisualViewerData context, List<NodeResult> inputs)
+        public NodeResult Execute(INVPData context, List<NodeResult> inputs)
         {
             var num1 = (double)inputs[0].Value;
             var num2 = (double)inputs[1].Value;

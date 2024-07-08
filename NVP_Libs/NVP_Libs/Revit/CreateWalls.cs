@@ -16,11 +16,11 @@ namespace NVP_Libs.Revit
     [NodeInput("линия", typeof(Line))]
     [NodeInput("уровень", typeof(Level))]
     [NodeInput("высота", typeof(double))]
-    public class CreateWalls : IRevitNode
+    public class CreateWalls : INode
     {
-        public NodeResult Execute(IVisualViewerData context, List<NodeResult> inputs, object commandData)
+        public NodeResult Execute(INVPData context, List<NodeResult> inputs)
         {
-            var doc = (commandData as ExternalCommandData).Application.ActiveUIDocument.Document;
+            var doc = (context.GetCADContext() as ExternalCommandData).Application.ActiveUIDocument.Document;
 
             var wallName = (string)inputs[0].Value;
             var line = (Line)inputs[1].Value;

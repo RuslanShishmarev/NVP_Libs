@@ -8,9 +8,9 @@ namespace NVP_Libs.Revit
 {
     [NodeInput("элемент", typeof(Element))]
     [NodeInput("свойство", typeof(string))]
-    public class GetPropertyByName : IRevitNode
+    public class GetPropertyByName : INode
     {
-        public NodeResult Execute(IVisualViewerData context, List<NodeResult> inputs, object commandData)
+        public NodeResult Execute(INVPData context, List<NodeResult> inputs)
         {
             var element = (Element)inputs[0].Value;
             var parameterName = (string)inputs[1].Value;

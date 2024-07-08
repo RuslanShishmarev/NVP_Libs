@@ -15,12 +15,11 @@ namespace NVP_Libs.Revit
     [NodeInput("типоразмер", typeof(FamilySymbol))]
     [NodeInput("координата", typeof(XYZ))]
     [NodeInput("вектор", typeof(XYZ))]
-    public class PlaceFamilyInstanceOnPlane : IRevitNode
+    public class PlaceFamilyInstanceOnPlane : INode
     {
-        public NodeResult Execute(IVisualViewerData context, List<NodeResult> inputs, object commandData)
+        public NodeResult Execute(INVPData context, List<NodeResult> inputs)
         {
-            var uiDoc = (commandData as ExternalCommandData).Application.ActiveUIDocument;
-            var doc = uiDoc.Document;
+            var doc = (context.GetCADContext() as ExternalCommandData).Application.ActiveUIDocument.Document;
 
             var face = (Face)inputs[0].Value;
             var familySymbol = (FamilySymbol)inputs[1].Value;

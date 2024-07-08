@@ -15,11 +15,11 @@ namespace NVP_Libs.Revit
     [NodeInput("координата", typeof(XYZ))]
     [NodeInput("типоразмер", typeof(FamilySymbol))]
     [NodeInput("уровень", typeof(Level))]
-    public class PlaceFamilyInstanceXYZ : IRevitNode
+    public class PlaceFamilyInstanceXYZ : INode
     {
-        public NodeResult Execute(IVisualViewerData context, List<NodeResult> inputs, object commandData)
+        public NodeResult Execute(INVPData context, List<NodeResult> inputs)
         {         
-            var doc = (commandData as ExternalCommandData).Application.ActiveUIDocument.Document;
+            var doc = (context.GetCADContext() as ExternalCommandData).Application.ActiveUIDocument.Document;
 
             var point = (XYZ)inputs[0].Value;
             var familySymbol = (FamilySymbol)inputs[1].Value;

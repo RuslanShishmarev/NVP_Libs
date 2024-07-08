@@ -18,12 +18,11 @@ namespace NVP_Libs.Revit
     [NodeInput("типоразмер", typeof(FamilySymbol))]
     [NodeInput("координата", typeof(XYZ))]
     [NodeInput("вектор", typeof(XYZ))]
-    public class PlaceFamilyInstanceOnFloor : IRevitNode
+    public class PlaceFamilyInstanceOnFloor : INode
     {
-        public NodeResult Execute(IVisualViewerData context, List<NodeResult> inputs, object commandData)
+        public NodeResult Execute(INVPData context, List<NodeResult> inputs)
         {
-            var uiDoc = (commandData as ExternalCommandData).Application.ActiveUIDocument;
-            var doc = uiDoc.Document;
+            var doc = (context.GetCADContext() as ExternalCommandData).Application.ActiveUIDocument.Document;
 
             var element = (Element)inputs[0].Value;
             var side = (bool)inputs[1].Value;

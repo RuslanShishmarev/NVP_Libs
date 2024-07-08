@@ -9,11 +9,11 @@ namespace NVP_Libs.Revit
 {
     [NodeInput("свойство", typeof(Parameter))]
     [NodeInput("новое значение", typeof(object))]
-    internal class ChangeProperty : IRevitNode
+    internal class ChangeProperty : INode
     {
-        public NodeResult Execute(IVisualViewerData context, List<NodeResult> inputs, object commandData)
+        public NodeResult Execute(INVPData context, List<NodeResult> inputs)
         {
-            var doc = (commandData as ExternalCommandData).Application.ActiveUIDocument.Document;
+            var doc = (context.GetCADContext() as ExternalCommandData).Application.ActiveUIDocument.Document;
 
             var parameter = (Parameter)inputs[0].Value;
             var newValue = inputs[1].Value;

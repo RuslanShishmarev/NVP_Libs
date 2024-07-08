@@ -7,9 +7,9 @@ using System.Collections.Generic;
 namespace NVP_Libs.Revit
 {
     [NodeInput("свойство", typeof(Parameter))]
-    internal class GetParameterValue : IRevitNode
+    internal class GetParameterValue : INode
     {
-        public NodeResult Execute(IVisualViewerData context, List<NodeResult> inputs, object commandData)
+        public NodeResult Execute(INVPData context, List<NodeResult> inputs)
         {
             var parameter = (Parameter)inputs[0].Value;
             StorageType storageType = parameter.StorageType;
