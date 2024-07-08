@@ -16,7 +16,6 @@ namespace NVP_Libs.Revit
             var doc = (context.GetCADContext() as ExternalCommandData).Application.ActiveUIDocument.Document;
 
             var symbolName = (string)inputs[0].Value;
-
             var symbol = new FilteredElementCollector(doc)
                 .OfClass(typeof(FamilySymbol))
                 .Cast<FamilySymbol>()

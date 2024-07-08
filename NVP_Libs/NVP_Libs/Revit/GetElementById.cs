@@ -17,7 +17,6 @@ namespace NVP_Libs.Revit
 
             var elementIdValue = Int64.Parse((string)inputs[0].Value);
             var elementId = new ElementId(elementIdValue); 
-
             Element element = doc.GetElement(elementId);
             return new NodeResult(element);
         }

@@ -11,7 +11,7 @@ using XYZ = NVP.API.Geometry.XYZ;
 
 namespace NVP_Libs.Revit
 {
-    [NodeInput("грань", typeof(Face))]
+    [NodeInput("грань", typeof(Reference))]
     [NodeInput("типоразмер", typeof(FamilySymbol))]
     [NodeInput("координата", typeof(XYZ))]
     [NodeInput("вектор", typeof(XYZ))]
@@ -21,25 +21,20 @@ namespace NVP_Libs.Revit
         {
             var doc = (context.GetCADContext() as ExternalCommandData).Application.ActiveUIDocument.Document;
 
-            var face = (Face)inputs[0].Value;
+            var faceReference = (Reference)inputs[0].Value;
             var familySymbol = (FamilySymbol)inputs[1].Value;
             var point = (XYZ)inputs[2].Value;
             var vector = (XYZ)inputs[3].Value;
+
             RevitXYZ revitPoint = ConvertNVPToRevit.ConvertXYZ(point);
             RevitXYZ revitVector = ConvertNVPToRevit.ConvertXYZ(vector);
-            
+
             using (Transaction transaction = new Transaction(doc, "Размещение экземпляра семейства на плоскости"))
-            { 
-                IntersectionResult result = face.Project(revitPoint);
-                if (result != null) 
-                {
-                    RevitXYZ pointProjection = result.XYZPoint;
-                    transaction.Start();
-                    var instance = doc.Create.NewFamilyInstance(face, pointProjection, revitVector, familySymbol);
-                    transaction.Commit();
-                    return new NodeResult(instance);
-                }
-                return null;
+            {
+                transaction.Start();
+                var instance = doc.Create.NewFamilyInstance(faceReference, revitPoint, revitVector, familySymbol);
+                transaction.Commit();
+                return new NodeResult(instance);
             }
         }
     }

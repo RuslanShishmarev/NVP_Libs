@@ -33,7 +33,7 @@ namespace NVP_Libs.Revit
                             parameter.Set((int)newValue);
                             break;
                         case StorageType.Double:
-                            parameter.Set((double)newValue);
+                            parameter.Set((double)newValue * 3.28084);
                             break;
                         case StorageType.ElementId:
                             parameter.Set((ElementId)newValue);

@@ -13,7 +13,7 @@ using XYZ = NVP.API.Geometry.XYZ;
 
 namespace NVP_Libs.Revit
 {
-    [NodeInput("элемент", typeof(Element))]
+    [NodeInput("элемент", typeof(Floor))]
     [NodeInput("верхняя грань", typeof(bool))]
     [NodeInput("типоразмер", typeof(FamilySymbol))]
     [NodeInput("координата", typeof(XYZ))]
@@ -24,11 +24,12 @@ namespace NVP_Libs.Revit
         {
             var doc = (context.GetCADContext() as ExternalCommandData).Application.ActiveUIDocument.Document;
 
-            var element = (Element)inputs[0].Value;
+            var element = (Floor)inputs[0].Value;
             var side = (bool)inputs[1].Value;
             var familySymbol = (FamilySymbol)inputs[2].Value;
             var point = (XYZ)inputs[3].Value;
             var vector = (XYZ)inputs[4].Value;
+
             RevitXYZ revitPoint = ConvertNVPToRevit.ConvertXYZ(point);
             RevitXYZ revitVector = ConvertNVPToRevit.ConvertXYZ(vector);
             Options geometryOptions = new Options();
