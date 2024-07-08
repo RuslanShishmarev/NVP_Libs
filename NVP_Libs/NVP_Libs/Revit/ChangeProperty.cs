@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-
+﻿using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
-using Autodesk.Revit.DB;
 
 using NVP.API.Nodes;
+
+using System.Collections.Generic;
 
 namespace NVP_Libs.Revit
 {
@@ -19,7 +19,7 @@ namespace NVP_Libs.Revit
             var newValue = inputs[1].Value;
             StorageType storageType = parameter.StorageType;
 
-            using (Transaction transaction = new Transaction(doc, "Change Property"))
+            using (Transaction transaction = new Transaction(doc, "Изменение свойства"))
             {
                 if (parameter != null && !parameter.IsReadOnly)
                 {

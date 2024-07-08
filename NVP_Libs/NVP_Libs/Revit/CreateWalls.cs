@@ -29,13 +29,11 @@ namespace NVP_Libs.Revit
 
             var wallType = new FilteredElementCollector(doc)
                 .OfClass(typeof(WallType))
-                .FirstOrDefault(w => w.Name == wallName);
+                .FirstOrDefault(w => w.Name.Equals(wallName));
             var wallTypeId = ((WallType)wallType).Id;
-
             var levelId = level.Id;
 
-
-            using (Transaction transaction = new Transaction(doc, "Create Walls"))
+            using (Transaction transaction = new Transaction(doc, "Создание стены"))
             {
                 transaction.Start();
                 RevitLine revitLine = ConvertNVPToRevit.ConvertLine(line);

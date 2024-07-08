@@ -1,14 +1,15 @@
-﻿using System.Collections.Generic;
-using System;
-
+﻿using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
-using Autodesk.Revit.DB;
-using RevitXYZ = Autodesk.Revit.DB.XYZ;
 
 using NVP.API.Nodes;
-using XYZ = NVP.API.Geometry.XYZ;
-using System.Linq;
 using NVP_Libs.Revit.Services;
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+using RevitXYZ = Autodesk.Revit.DB.XYZ;
+using XYZ = NVP.API.Geometry.XYZ;
 
 namespace NVP_Libs.Revit
 {
@@ -26,7 +27,7 @@ namespace NVP_Libs.Revit
 
             var element = (Element)inputs[0].Value;
             var side = (bool)inputs[1].Value;
-            var family = (FamilySymbol)inputs[2].Value;
+            var familySymbol = (FamilySymbol)inputs[2].Value;
             var point = (XYZ)inputs[3].Value;
             var vector = (XYZ)inputs[4].Value;
             RevitXYZ revitPoint = ConvertNVPToRevit.ConvertXYZ(point);
@@ -38,7 +39,7 @@ namespace NVP_Libs.Revit
             var elementFaces = elementGeometry.Faces;
             var z = RevitXYZ.BasisZ;
 
-            using (Transaction transaction = new Transaction(doc, "Place Family Instance On Floor"))
+            using (Transaction transaction = new Transaction(doc, "Размещение экземпляра семейства на перекрытии"))
             {
                 if (side)
                 {
@@ -53,7 +54,7 @@ namespace NVP_Libs.Revit
                             {
                                 RevitXYZ pointProjection = result.XYZPoint;
                                 transaction.Start();
-                                var instance = doc.Create.NewFamilyInstance(topFace, pointProjection, revitVector, family);
+                                var instance = doc.Create.NewFamilyInstance(topFace, pointProjection, revitVector, familySymbol);
                                 transaction.Commit();
                                 return new NodeResult(instance);
                             }
@@ -76,7 +77,7 @@ namespace NVP_Libs.Revit
                             {
                                 RevitXYZ pointProjection = result.XYZPoint;
                                 transaction.Start();
-                                var instance = doc.Create.NewFamilyInstance(bottomFace, pointProjection, revitVector, family);
+                                var instance = doc.Create.NewFamilyInstance(bottomFace, pointProjection, revitVector, familySymbol);
                                 transaction.Commit();
                                 return new NodeResult(instance);
                             }

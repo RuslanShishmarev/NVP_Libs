@@ -1,7 +1,8 @@
-﻿using XYZ = NVP.API.Geometry.XYZ;
-using RevitXYZ = Autodesk.Revit.DB.XYZ;
+﻿using NVP.API.Geometry;
+
 using RevitLine = Autodesk.Revit.DB.Line;
-using NVP.API.Geometry;
+using RevitXYZ = Autodesk.Revit.DB.XYZ;
+using XYZ = NVP.API.Geometry.XYZ;
 
 namespace NVP_Libs.Revit.Services
 {
