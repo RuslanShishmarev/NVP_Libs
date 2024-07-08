@@ -7,13 +7,11 @@ using System.Text.RegularExpressions;
 namespace NVP_Libs.Common
 {
     [NodeInput("полный путь до файла", typeof(string))]
-    [NodeInput("лист", typeof(string))]
-    public class ExcelParce : INode
+    public class ExcelParceCSV : INode
     {
         public NodeResult Execute(INVPData context, List<NodeResult> inputs)
         {
             string link = (string)inputs[0].Value;
-            string sheet = (string)inputs[1].Value;
 
             string fileContent = File.ReadAllText(link);
             string[] rows = fileContent.Split('\n');
