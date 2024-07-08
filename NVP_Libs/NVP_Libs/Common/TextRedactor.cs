@@ -9,7 +9,7 @@ namespace NVP_Libs.Common
     [NodeInput("полный путь до файла", typeof(string))]
     [NodeInput("текст", typeof(string))]
 
-    public class Text_redactor : INode
+    public class TextRedactor : INode
     {
         public NodeResult Execute(INVPData context, List<NodeResult> inputs)
         {
