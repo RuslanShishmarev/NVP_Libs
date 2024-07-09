@@ -28,7 +28,7 @@ namespace NVP_Libs.Revit
             var level = (Level)inputs[2].Value;
             var name = (string)inputs[3].Value;
 
-            RevitXYZ revitPoint = ConvertNVPToRevit.ConvertXYZ(point);
+            RevitXYZ revitPoint = point.ToRevit();
             var structuralType = (StructuralType) Enum.Parse(typeof(StructuralType), name);
             
             using (Transaction transaction = new Transaction(doc, "Размещение экземпляра семейства по точке"))

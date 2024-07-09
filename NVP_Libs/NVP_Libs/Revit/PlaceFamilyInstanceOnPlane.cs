@@ -1,4 +1,5 @@
 ﻿using Autodesk.Revit.DB;
+using Autodesk.Revit.DB.Analysis;
 using Autodesk.Revit.UI;
 
 using NVP.API.Nodes;
@@ -26,8 +27,8 @@ namespace NVP_Libs.Revit
             var point = (XYZ)inputs[2].Value;
             var vector = (XYZ)inputs[3].Value;
 
-            RevitXYZ revitPoint = ConvertNVPToRevit.ConvertXYZ(point);
-            RevitXYZ revitVector = ConvertNVPToRevit.ConvertXYZ(vector);
+            RevitXYZ revitPoint = point.ToRevit();
+            RevitXYZ revitVector = vector.ToRevit();
 
             using (Transaction transaction = new Transaction(doc, "Размещение экземпляра семейства на плоскости"))
             {

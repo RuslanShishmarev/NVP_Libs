@@ -11,20 +11,13 @@ namespace NVP_Libs.Revit
     {
         public NodeResult Execute(INVPData context, List<NodeResult> inputs)
         {
-            try
-            {
-                var uiDoc = (context.GetCADContext() as ExternalCommandData).Application.ActiveUIDocument;
-                var selection = uiDoc.Selection;
+            var uiDoc = (context.GetCADContext() as ExternalCommandData).Application.ActiveUIDocument;
+            var selection = uiDoc.Selection;
 
-                var pickPoint = selection.PickPoint(ObjectSnapTypes.Nearest, "Выберите точку");
-                var NVPPickPoint = context.CreatePoint(pickPoint.X, pickPoint.Y, pickPoint.Z);
+            var pickPoint = selection.PickPoint(ObjectSnapTypes.Nearest, "Выберите точку");
+            var NVPPickPoint = context.CreatePoint(pickPoint.X, pickPoint.Y, pickPoint.Z);
 
-                return new NodeResult(NVPPickPoint);
-            }
-            catch (Autodesk.Revit.Exceptions.OperationCanceledException)
-            {
-                return new NodeResult(null);
-            }
+            return new NodeResult(NVPPickPoint);
         }
     }
 }

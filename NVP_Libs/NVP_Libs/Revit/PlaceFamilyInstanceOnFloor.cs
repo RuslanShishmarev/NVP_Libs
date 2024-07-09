@@ -30,63 +30,45 @@ namespace NVP_Libs.Revit
             var point = (XYZ)inputs[3].Value;
             var vector = (XYZ)inputs[4].Value;
 
-            RevitXYZ revitPoint = ConvertNVPToRevit.ConvertXYZ(point);
-            RevitXYZ revitVector = ConvertNVPToRevit.ConvertXYZ(vector);
+            RevitXYZ revitPoint = point.ToRevit();
+            RevitXYZ revitVector = vector.ToRevit();
             Options geometryOptions = new Options();
             geometryOptions.ComputeReferences = true;
 
             Solid elementGeometry = element.get_Geometry(geometryOptions).FirstOrDefault(it => it is Solid) as Solid;
             var elementFaces = elementGeometry.Faces;
-            var z = RevitXYZ.BasisZ;
 
             using (Transaction transaction = new Transaction(doc, "Размещение экземпляра семейства на перекрытии"))
             {
-                if (side)
+                foreach (Face face in elementFaces)
                 {
-                    Face topFace = null;
-                    foreach (Face face in elementFaces)
+                    if (CheckAngle(side, face))
                     {
-                        if (face.ComputeNormal(new UV()).AngleTo(z) < Math.Pow(10, -6))
+                        IntersectionResult result = face.Project(revitPoint);
+                        if (result != null)
                         {
-                            topFace = face;
-                            IntersectionResult result = topFace.Project(revitPoint);
-                            if (result != null)
-                            {
-                                RevitXYZ pointProjection = result.XYZPoint;
-                                transaction.Start();
-                                var instance = doc.Create.NewFamilyInstance(topFace, pointProjection, revitVector, familySymbol);
-                                transaction.Commit();
-                                return new NodeResult(instance);
-                            }
-                            return null;
+                            RevitXYZ pointProjection = result.XYZPoint;
+                            transaction.Start();
+                            var instance = doc.Create.NewFamilyInstance(face, pointProjection, revitVector, familySymbol);
+                            transaction.Commit();
+                            return new NodeResult(instance);
                         }
-                        continue;
-                    }
-                    return null;
+                        return new NodeResult(null);
+                    }    
                 }
-                else
-                {
-                    Face bottomFace = null;
-                    foreach (Face face in elementFaces)
-                    {
-                        if (Math.Abs(face.ComputeNormal(new UV()).AngleTo(z) - Math.PI) < Math.Pow(10, -6))
-                        {
-                            bottomFace = face;
-                            IntersectionResult result = bottomFace.Project(revitPoint);
-                            if (result != null)
-                            {
-                                RevitXYZ pointProjection = result.XYZPoint;
-                                transaction.Start();
-                                var instance = doc.Create.NewFamilyInstance(bottomFace, pointProjection, revitVector, familySymbol);
-                                transaction.Commit();
-                                return new NodeResult(instance);
-                            }
-                            return null;
-                        }
-                        continue;
-                    }
-                    return null;
-                }
+                return new NodeResult(null);
+            }
+        }
+        public bool CheckAngle(bool side, Face face)
+        {
+            var z = RevitXYZ.BasisZ;
+            if (side)
+            {
+                return face.ComputeNormal(new UV()).AngleTo(z) < Math.Pow(10, -6);
+            }
+            else
+            {
+                return Math.Abs(face.ComputeNormal(new UV()).AngleTo(z) - Math.PI) < Math.Pow(10, -6);
             }
         }
     }

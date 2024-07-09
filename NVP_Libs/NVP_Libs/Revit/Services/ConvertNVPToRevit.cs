@@ -6,14 +6,14 @@ using XYZ = NVP.API.Geometry.XYZ;
 
 namespace NVP_Libs.Revit.Services
 {
-    public class ConvertNVPToRevit
+    public static class ConvertNVPToRevit
     {
-        public static RevitXYZ ConvertXYZ(XYZ point)
+        public static RevitXYZ ToRevit(this XYZ point)
         {
             RevitXYZ revitPoint = new RevitXYZ(point.X, point.Y, point.Z);
             return revitPoint;
         }
-        public static RevitLine ConvertLine(Line line)
+        public static RevitLine ToRevit(this Line line)
         {
             var start = new RevitXYZ(line.Start.X, line.Start.Y, line.Start.Z);
             var end = new RevitXYZ(line.End.X, line.End.Y, line.End.Z);

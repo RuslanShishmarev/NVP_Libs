@@ -7,7 +7,7 @@ using System.Collections.Generic;
 namespace NVP_Libs.Revit
 {
     [NodeInput("элемент", typeof(Element))]
-    [NodeInput("свойство", typeof(string))]
+    [NodeInput("параметр", typeof(string))]
     public class GetPropertyByName : INode
     {
         public NodeResult Execute(INVPData context, List<NodeResult> inputs)
@@ -16,12 +16,7 @@ namespace NVP_Libs.Revit
             var parameterName = (string)inputs[1].Value;
 
             Parameter parameter = element.LookupParameter(parameterName);
-            
-            if (parameter != null)
-            {
-                return new NodeResult(parameter);
-            }
-            return null;
+            return new NodeResult(parameter);
         }
     }
 }

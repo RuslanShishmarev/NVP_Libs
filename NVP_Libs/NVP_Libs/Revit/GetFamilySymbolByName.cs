@@ -18,7 +18,6 @@ namespace NVP_Libs.Revit
             var symbolName = (string)inputs[0].Value;
             var symbol = new FilteredElementCollector(doc)
                 .OfClass(typeof(FamilySymbol))
-                .Cast<FamilySymbol>()
                 .FirstOrDefault(s => s.Name == symbolName);
             return new NodeResult(symbol);
         }

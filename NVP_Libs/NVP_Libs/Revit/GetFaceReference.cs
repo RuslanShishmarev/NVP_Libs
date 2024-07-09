@@ -11,18 +11,11 @@ namespace NVP_Libs.Revit
     {
         public NodeResult Execute(INVPData context, List<NodeResult> inputs)
         {
-            try
-            {
-                var uiDoc = (context.GetCADContext() as ExternalCommandData).Application.ActiveUIDocument;
-                var selection = uiDoc.Selection;
+            var uiDoc = (context.GetCADContext() as ExternalCommandData).Application.ActiveUIDocument;
+            var selection = uiDoc.Selection;
 
-                var faceReference = selection.PickObject(ObjectType.Face, "Выберите плоскость");
-                return new NodeResult(faceReference);
-            }
-            catch (Autodesk.Revit.Exceptions.OperationCanceledException)
-            {
-                return new NodeResult(null);
-            }
+            var faceReference = selection.PickObject(ObjectType.Face, "Выберите плоскость");
+            return new NodeResult(faceReference);
         }
     }
 }

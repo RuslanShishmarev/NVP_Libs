@@ -36,7 +36,7 @@ namespace NVP_Libs.Revit
             using (Transaction transaction = new Transaction(doc, "Создание стены"))
             {
                 transaction.Start();
-                RevitLine revitLine = ConvertNVPToRevit.ConvertLine(line);
+                RevitLine revitLine = line.ToRevit();
                 Wall wall = Wall.Create(doc, revitLine, wallTypeId, levelId, height, 0, false, false);
                 transaction.Commit();
                 return new NodeResult(wall);

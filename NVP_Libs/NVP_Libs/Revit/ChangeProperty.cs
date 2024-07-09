@@ -3,11 +3,12 @@ using Autodesk.Revit.UI;
 
 using NVP.API.Nodes;
 
+using System;
 using System.Collections.Generic;
 
 namespace NVP_Libs.Revit
 {
-    [NodeInput("свойство", typeof(Parameter))]
+    [NodeInput("параметр", typeof(Parameter))]
     [NodeInput("новое значение", typeof(object))]
     internal class ChangeProperty : INode
     {
@@ -19,30 +20,35 @@ namespace NVP_Libs.Revit
             var newValue = inputs[1].Value;
             StorageType storageType = parameter.StorageType;
 
+            if (parameter == null)
+            {
+                throw new ArgumentNullException(nameof(parameter), "Параметр не может быть null");
+            }
+            else if (parameter.IsReadOnly)
+            {
+                throw new InvalidOperationException("Параметр только для чтения");
+            }
             using (Transaction transaction = new Transaction(doc, "Изменение свойства"))
             {
-                if (parameter != null && !parameter.IsReadOnly)
+                transaction.Start();
+                switch (storageType)
                 {
-                    transaction.Start();
-                    switch (storageType)
-                    {
-                        case StorageType.String:
-                            parameter.Set((string)newValue);
-                            break;
-                        case StorageType.Integer:
-                            parameter.Set((int)newValue);
-                            break;
-                        case StorageType.Double:
-                            parameter.Set((double)newValue * 3.28084);
-                            break;
-                        case StorageType.ElementId:
-                            parameter.Set((ElementId)newValue);
-                            break;
-                    }
-                    transaction.Commit();
-                    return new NodeResult(parameter);
+                    case StorageType.String:
+                        parameter.Set((string)newValue);
+                        break;
+                    case StorageType.Integer:
+                        parameter.Set((int)newValue);
+                        break;
+                    case StorageType.Double:
+                        newValue = (double)newValue * 3.28084;
+                        parameter.Set((double)newValue);
+                        break;
+                    case StorageType.ElementId:
+                        parameter.Set((ElementId)newValue);
+                        break;
                 }
-                return null;
+                transaction.Commit();
+                return new NodeResult(parameter);
             }
         }
     }
