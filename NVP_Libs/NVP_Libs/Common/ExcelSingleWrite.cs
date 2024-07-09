@@ -21,27 +21,27 @@ namespace NVP_Libs.Common
             string nameofSheet = (string)inputs[3].Value;
 
 
-                if (!File.Exists(fileName))
-                {
-                    return new NodeResult("Файл не существует.");
-                }
+            if (!File.Exists(fileName))
+            {
+                return new NodeResult("Файл не существует.");
+            }
 
-                Excel.Application excelApp = new Excel.Application();
-                Excel.Workbook workbook = excelApp.Workbooks.Open(fileName);
-                Excel.Worksheet worksheet = workbook.Sheets[nameofSheet];
+            Excel.Application excelApp = new Excel.Application();
+            Excel.Workbook workbook = excelApp.Workbooks.Open(fileName);
+            Excel.Worksheet worksheet = workbook.Sheets[nameofSheet];
 
-                if (worksheet == null)
-                {
-                    return new NodeResult($"Лист {nameofSheet} не существует в файле {fileName}.");
-                }
+            if (worksheet == null)
+            {
+                return new NodeResult($"Лист {nameofSheet} не существует в файле {fileName}.");
+            }
 
-                worksheet.Range[cell].Value2 = text;
+            worksheet.Range[cell].Value2 = text;
 
-                workbook.Save();
-                workbook.Close();
-                excelApp.Quit();
+            workbook.Save();
+            workbook.Close();
+            excelApp.Quit();
 
-                return new NodeResult(fileName);
+            return new NodeResult(fileName);
 
         }
     }
