@@ -27,7 +27,7 @@ namespace NVP_Libs.Revit
             var wallName = (string)inputs[0].Value;
             var line = (Line)inputs[1].Value;
             var level = (Level)inputs[2].Value;
-            var height = (double)inputs[3].Value * 3.28084;
+            var height = (double)inputs[3].Value;
             var flip = (bool)inputs[4].Value;
             var structural = (bool)inputs[5].Value;
 
