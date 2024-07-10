@@ -14,7 +14,7 @@ namespace NVP_Libs.Common
             char defaultSplitter = ';';
             string link = (string)inputs[0].Value;
             char splitter = defaultSplitter;
-            if (inputs[1].Value != null)
+            if (inputs[1]?.Value != null)
             {
                 splitter =Convert.ToChar(inputs[1].Value);
             }

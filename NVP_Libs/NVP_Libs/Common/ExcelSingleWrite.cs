@@ -20,7 +20,6 @@ namespace NVP_Libs.Common
             string cell = (string)inputs[2].Value;
             string nameofSheet = (string)inputs[3].Value;
 
-
             if (!File.Exists(fileName))
             {
                 return new NodeResult("Файл не существует.");
@@ -42,7 +41,6 @@ namespace NVP_Libs.Common
             excelApp.Quit();
 
             return new NodeResult(fileName);
-
         }
     }
 }
