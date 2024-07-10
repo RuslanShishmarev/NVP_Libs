@@ -40,7 +40,6 @@ namespace NVP_Libs.Revit
                         parameter.Set((int)newValue);
                         break;
                     case StorageType.Double:
-                        newValue = (double)newValue * 3.28084;
                         parameter.Set((double)newValue);
                         break;
                     case StorageType.ElementId:

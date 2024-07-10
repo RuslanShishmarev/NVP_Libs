@@ -62,13 +62,15 @@ namespace NVP_Libs.Revit
         public bool CheckAngle(bool side, Face face)
         {
             var z = RevitXYZ.BasisZ;
+            var zero = Math.Pow(10, -6);
+
             if (side)
             {
-                return face.ComputeNormal(new UV()).AngleTo(z) < Math.Pow(10, -6);
+                return face.ComputeNormal(new UV()).AngleTo(z) < zero;
             }
             else
             {
-                return Math.Abs(face.ComputeNormal(new UV()).AngleTo(z) - Math.PI) < Math.Pow(10, -6);
+                return Math.Abs(face.ComputeNormal(new UV()).AngleTo(z) - Math.PI) < zero;
             }
         }
     }

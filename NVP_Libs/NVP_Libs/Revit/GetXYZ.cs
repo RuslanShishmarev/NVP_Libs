@@ -15,9 +15,9 @@ namespace NVP_Libs.Revit
             var selection = uiDoc.Selection;
 
             var pickPoint = selection.PickPoint(ObjectSnapTypes.Nearest, "Выберите точку");
-            var NVPPickPoint = context.CreatePoint(pickPoint.X, pickPoint.Y, pickPoint.Z);
+            var nvpPickPoint = context.CreatePoint(pickPoint.X, pickPoint.Y, pickPoint.Z);
 
-            return new NodeResult(NVPPickPoint);
+            return new NodeResult(nvpPickPoint);
         }
     }
 }
