@@ -1,41 +1,41 @@
 ﻿using NVP.API.Nodes;
 
+using OfficeOpenXml;
+
 using System.Collections.Generic;
 using System.IO;
-using OfficeOpenXml;
 
 namespace NVP_Libs.Common
 {
     [NodeInput("полный путь до файла", typeof(string))]
-    [NodeInput("лист", typeof(string))]
     public class ExcelParceXLS : INode
     {
         public NodeResult Execute(INVPData context, List<NodeResult> inputs)
         {
             string link = (string)inputs[0].Value;
-            string sheet = (string)inputs[1].Value;
+            var allData = new Dictionary<string, List<object[]>>();
 
             using (FileStream stream = File.Open(link, FileMode.Open))
             {
                 using (ExcelPackage package = new ExcelPackage(stream))
                 {
-                    ExcelWorksheet worksheet = package.Workbook.Worksheets[sheet];
-                    List<string> data = new List<string>();
-
-                    for (int row = 1; row <= worksheet.Dimension.End.Row; row++)
+                    const int startIndex = 1;
+                    foreach (ExcelWorksheet workSheet in package.Workbook.Worksheets)
                     {
-                        string rowData = "";
-                        for (int col = 1; col <= worksheet.Dimension.End.Column; col++)
+                        var data = new List<object[]>();
+
+                        for (int row = startIndex; row <= workSheet.Dimension.End.Row; row++)
                         {
-                            rowData += worksheet.Cells[row, col].Value?.ToString();
-                            if (col < worksheet.Dimension.End.Column)
+                            object[] rowData = new object[workSheet.Dimension.End.Column];
+                            for (int col = startIndex; col <= workSheet.Dimension.End.Column; col++)
                             {
-                                rowData += ";";
+                                rowData[col - startIndex] = workSheet.Cells[row, col].Value;
                             }
+                            data.Add(rowData);
                         }
-                        data.Add(rowData);
+                        allData.Add(workSheet.Name, data);
                     }
-                    return new NodeResult(data);
+                    return new NodeResult(allData);
                 }
             }
         }
