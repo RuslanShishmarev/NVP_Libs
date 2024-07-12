@@ -8,7 +8,7 @@ using System.Collections.Generic;
 namespace NVP_Libs.Revit
 {
     [NodeInput("параметр", typeof(Parameter))]
-    internal class GetParameterValue : INode
+    public class GetParameterValue : INode
     {
         public NodeResult Execute(INVPData context, List<NodeResult> inputs)
         {

@@ -164,6 +164,8 @@
     <Compile Include="Revit\CreateWalls.cs" />
     <Compile Include="Revit\GetElement.cs" />
     <Compile Include="Revit\GetElementById.cs" />
+    <Compile Include="Revit\GetTypesByBuiltInCategory.cs" />
+    <Compile Include="Revit\GetElementsByBuiltInCategory.cs" />
     <Compile Include="Revit\GetFaceReference.cs" />
     <Compile Include="Revit\GetFamilySymbolByName.cs" />
     <Compile Include="Revit\GetLevelByName.cs" />
@@ -181,7 +183,6 @@
     <Folder Include="Nanocad\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
     <None Include="RevitNodes.nodeitem" />
   </ItemGroup>
   <ItemGroup>
