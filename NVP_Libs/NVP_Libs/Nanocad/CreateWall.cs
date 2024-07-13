@@ -1,5 +1,5 @@
 ﻿using BIMStructureMgd.Common;
-//
+//Балки и перекрытия бетон
 //Пространства имён nanoCAD BIM Конструкции
 using BIMStructureMgd.DatabaseObjects;
 using HostMgd.ApplicationServices;

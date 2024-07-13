@@ -172,6 +172,8 @@
     <Compile Include="Common\WritingArrayExcel.cs" />
     <Compile Include="ExampleNanocad.cs" />
     <Compile Include="ExampleRevit.cs" />
+    <Compile Include="Nanocad\CreateConcreteColumn.cs" />
+    <Compile Include="Nanocad\CreateConcretePlate.cs" />
     <Compile Include="Nanocad\CreateWall.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Revit\ChangeProperty.cs" />
