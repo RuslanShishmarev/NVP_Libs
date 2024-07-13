@@ -40,6 +40,12 @@
     <Reference Include="ExcelNumberFormat, Version=1.1.0.0, Culture=neutral, PublicKeyToken=23c6f5d73be07eca, processorArchitecture=MSIL">
       <HintPath>..\packages\ExcelNumberFormat.1.1.0\lib\net20\ExcelNumberFormat.dll</HintPath>
     </Reference>
+    <Reference Include="hostdbmgd">
+      <HintPath>..\..\..\..\..\Desktop\Практика_ноды\SDKNC\include-x64\hostdbmgd.dll</HintPath>
+    </Reference>
+    <Reference Include="hostmgd">
+      <HintPath>..\..\..\..\..\Desktop\Практика_ноды\SDKNC\include-x64\hostmgd.dll</HintPath>
+    </Reference>
     <Reference Include="Irony, Version=1.0.11.0, Culture=neutral, PublicKeyToken=ca48ace7223ead47, processorArchitecture=MSIL">
       <HintPath>..\packages\Irony.NetCore.1.0.11\lib\net461\Irony.dll</HintPath>
     </Reference>
@@ -51,6 +57,13 @@
       <HintPath>..\packages\Revit_All_Main_Versions_API_x64.2024.2.0\lib\net48\AdWindows.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
       <Private>False</Private>
+    </Reference>
+    <Reference Include="ncBIMSmgd">
+      <HintPath>..\..\..\..\..\Downloads\include-x64\ncBIMSmgd.dll</HintPath>
+    </Reference>
+    <Reference Include="nrxgatemgd, Version=1.0.0.0, Culture=neutral, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\Desktop\Практика_ноды\SDKNC\include-x64\nrxgatemgd.dll</HintPath>
     </Reference>
     <Reference Include="NVP.API">
       <HintPath>..\..\..\..\..\..\..\Program Files\NVP\NVP.API.dll</HintPath>
@@ -159,6 +172,9 @@
     <Compile Include="Common\WritingArrayExcel.cs" />
     <Compile Include="ExampleNanocad.cs" />
     <Compile Include="ExampleRevit.cs" />
+    <Compile Include="Nanocad\CreateConcreteColumn.cs" />
+    <Compile Include="Nanocad\CreateConcretePlate.cs" />
+    <Compile Include="Nanocad\CreateWall.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Revit\ChangeProperty.cs" />
     <Compile Include="Revit\CreateWalls.cs" />
@@ -179,18 +195,26 @@
     <Compile Include="Revit\PlaceFamilyInstanceXYZ.cs" />
     <Compile Include="Revit\Services\ConvertNVPToRevit.cs" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Nanocad\" />
-  </ItemGroup>
-  <ItemGroup>
+    <None Include="NanocadNodes.nodeitem" />
     <None Include="RevitNodes.nodeitem" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="GlebRevitNodes.nodeitem" />
+    <None Include="CommonNodes.nodeitem" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <COMReference Include="nanoCAD">
+      <Guid>{00FA1B17-5455-4C60-BB2A-6492A95D7A68}</Guid>
+      <VersionMajor>23</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
     <COMReference Include="OdaX">
       <Guid>{0DFA2554-8A2B-44D0-BE8F-85EEB803AEE9}</Guid>
       <VersionMajor>23</VersionMajor>
