@@ -1,7 +1,6 @@
 ﻿using BIMStructureMgd.Common;
-//Балки и перекрытия бетон
-//Пространства имён nanoCAD BIM Конструкции
 using BIMStructureMgd.DatabaseObjects;
+
 using HostMgd.ApplicationServices;
 
 using NVP.API.Nodes;
@@ -9,7 +8,6 @@ using NVP.API.Nodes;
 using System.Collections.Generic;
 using System.Linq;
 
-//Стандартные пространства имён платформы nanoCAD
 using Teigha.DatabaseServices;
 using Teigha.Geometry;
 
