@@ -41,13 +41,27 @@
       <HintPath>..\packages\ExcelNumberFormat.1.1.0\lib\net20\ExcelNumberFormat.dll</HintPath>
     </Reference>
     <Reference Include="hostdbmgd">
-      <HintPath>..\..\..\..\..\Desktop\Практика_ноды\SDKNC\include-x64\hostdbmgd.dll</HintPath>
+      <HintPath>Nanocad\nanolibs\hostdbmgd.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="hostmgd">
-      <HintPath>..\..\..\..\..\Desktop\Практика_ноды\SDKNC\include-x64\hostmgd.dll</HintPath>
+      <HintPath>Nanocad\nanolibs\hostmgd.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="imapimgd">
+      <HintPath>Nanocad\nanolibs\imapimgd.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Irony, Version=1.0.11.0, Culture=neutral, PublicKeyToken=ca48ace7223ead47, processorArchitecture=MSIL">
       <HintPath>..\packages\Irony.NetCore.1.0.11\lib\net461\Irony.dll</HintPath>
+    </Reference>
+    <Reference Include="mapibasetypes">
+      <HintPath>Nanocad\nanolibs\mapibasetypes.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="mapimgd">
+      <HintPath>Nanocad\nanolibs\mapimgd.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Office.Interop.Excel.15.0.4795.1001\lib\net20\Microsoft.Office.Interop.Excel.dll</HintPath>
@@ -59,14 +73,16 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="ncBIMSmgd">
-      <HintPath>..\..\..\..\..\Downloads\include-x64\ncBIMSmgd.dll</HintPath>
+      <HintPath>Nanocad\nanolibs\ncBIMSmgd.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="nrxgatemgd, Version=1.0.0.0, Culture=neutral, processorArchitecture=AMD64">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\Desktop\Практика_ноды\SDKNC\include-x64\nrxgatemgd.dll</HintPath>
+      <HintPath>Nanocad\nanolibs\nrxgatemgd.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="NVP.API">
-      <HintPath>..\..\..\..\..\..\..\Program Files\NVP\NVP.API.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\Program Files\NVP\framework4.8\NVP.API.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="RevitAPI, Version=24.2.0.0, Culture=neutral, processorArchitecture=AMD64">
@@ -174,7 +190,9 @@
     <Compile Include="ExampleRevit.cs" />
     <Compile Include="Nanocad\CreateConcreteColumn.cs" />
     <Compile Include="Nanocad\CreateConcretePlate.cs" />
+    <Compile Include="Nanocad\CreateLines.cs" />
     <Compile Include="Nanocad\CreateWall.cs" />
+    <Compile Include="Nanocad\CreateLine.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Revit\ChangeProperty.cs" />
     <Compile Include="Revit\CreateWalls.cs" />
@@ -195,7 +213,15 @@
     <Compile Include="Revit\PlaceFamilyInstanceXYZ.cs" />
     <Compile Include="Revit\Services\ConvertNVPToRevit.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Nanocad\nanolibs\hostdbmgd.dll" />
+    <Content Include="Nanocad\nanolibs\hostmgd.dll" />
+    <Content Include="Nanocad\nanolibs\imapimgd.dll" />
+    <Content Include="Nanocad\nanolibs\mapibasetypes.dll" />
+    <Content Include="Nanocad\nanolibs\mapimgd.dll" />
+    <Content Include="Nanocad\nanolibs\ncBIMSmgd.dll" />
+    <Content Include="Nanocad\nanolibs\nrxgatemgd.dll" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="NanocadNodes.nodeitem" />
     <None Include="RevitNodes.nodeitem" />
@@ -206,15 +232,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <COMReference Include="nanoCAD">
-      <Guid>{00FA1B17-5455-4C60-BB2A-6492A95D7A68}</Guid>
-      <VersionMajor>23</VersionMajor>
-      <VersionMinor>0</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>tlbimp</WrapperTool>
-      <Isolated>False</Isolated>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </COMReference>
     <COMReference Include="OdaX">
       <Guid>{0DFA2554-8A2B-44D0-BE8F-85EEB803AEE9}</Guid>
       <VersionMajor>23</VersionMajor>
@@ -236,7 +253,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>copy $(TargetPath) C:\ProgramData\NVP\libs
-copy "$(ProjectDir)*.nodeitem" C:\ProgramData\NVP\libs</PostBuildEvent>
+    <PostBuildEvent>copy $(TargetPath) C:\ProgramData\NVP\framework4.8\libs
+copy "$(ProjectDir)*.nodeitem" C:\ProgramData\NVP\framework4.8\libs</PostBuildEvent>
   </PropertyGroup>
 </Project>

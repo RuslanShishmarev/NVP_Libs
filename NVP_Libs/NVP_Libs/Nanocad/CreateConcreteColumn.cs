@@ -14,7 +14,7 @@ using NVP.API.Nodes;
 using NVPXYZ = NVP.API.Geometry.XYZ;
 using NVPLine = NVP.API.Geometry.Line;
 
-namespace NVP_Libs.NanoCAD
+namespace NVP_Libs.Nanocad
 {
     [NodeInput("начальная точка", typeof(NVPXYZ))]
     [NodeInput("конечная точка", typeof(NVPXYZ))]

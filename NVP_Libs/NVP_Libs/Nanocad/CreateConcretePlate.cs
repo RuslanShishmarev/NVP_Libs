@@ -13,7 +13,7 @@ using NVP.API.Nodes;
 
 using NVPXYZ = NVP.API.Geometry.XYZ;
 
-namespace NVP_Libs.NanoCAD
+namespace NVP_Libs.Nanocad
 {
     [NodeInput("тип плиты", typeof(string))]
     [NodeInput("высота", typeof(double))]

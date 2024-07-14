@@ -16,7 +16,7 @@ using Teigha.Geometry;
 using NVPLine = NVP.API.Geometry.Line;
 using NVPXYZ = NVP.API.Geometry.XYZ;
 
-namespace NVP_Libs.NanoCAD
+namespace NVP_Libs.Nanocad
 {
     [NodeInput("тип стены", typeof(string))]
     [NodeInput("линия", typeof(NVPLine))]
