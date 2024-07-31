@@ -195,6 +195,12 @@
     <Compile Include="Nanocad\CreateLine.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Revit\ChangeProperty.cs" />
+    <Compile Include="Revit\CreateDefaultWallNonRectangular.cs" />
+    <Compile Include="Revit\CreateDefaultWallRectengular.cs" />
+    <Compile Include="Revit\CreateFloor.cs" />
+    <Compile Include="Revit\CreateRoof.cs" />
+    <Compile Include="Revit\CreateWallNonRectangular.cs" />
+    <Compile Include="Revit\CreateWallNonRectangularVector.cs" />
     <Compile Include="Revit\CreateWalls.cs" />
     <Compile Include="Revit\GetElement.cs" />
     <Compile Include="Revit\GetElementById.cs" />

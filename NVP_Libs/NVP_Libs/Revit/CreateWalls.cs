@@ -16,6 +16,7 @@ namespace NVP_Libs.Revit
     [NodeInput("линия", typeof(Line))]
     [NodeInput("уровень", typeof(Level))]
     [NodeInput("высота", typeof(double))]
+    [NodeInput("смещение", typeof(double))]
     [NodeInput("внешняя сторона", typeof(bool))]
     [NodeInput("несущая", typeof(bool))]
     public class CreateWalls : INode
@@ -28,8 +29,9 @@ namespace NVP_Libs.Revit
             var line = (Line)inputs[1].Value;
             var level = (Level)inputs[2].Value;
             var height = (double)inputs[3].Value;
-            var flip = (bool)inputs[4].Value;
-            var structural = (bool)inputs[5].Value;
+            var offset = (double)inputs[4].Value;
+            var flip = (bool)inputs[5].Value;
+            var structural = (bool)inputs[6].Value;
 
             var wallType = new FilteredElementCollector(doc)
                 .OfClass(typeof(WallType))
@@ -41,7 +43,7 @@ namespace NVP_Libs.Revit
             {
                 transaction.Start();
                 RevitLine revitLine = line.ToRevit();
-                Wall wall = Wall.Create(doc, revitLine, wallTypeId, levelId, height, 0, flip, structural);
+                Wall wall = Wall.Create(doc, revitLine, wallTypeId, levelId, height, offset, flip, structural);
                 transaction.Commit();
                 return new NodeResult(wall);
             }
