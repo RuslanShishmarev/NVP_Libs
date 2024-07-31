@@ -13,3 +13,4 @@
 *.user
 
 *.htm
+/NVP_Libs/Framework4.8/NVP_Libs.Nanocad/bin/Debug
