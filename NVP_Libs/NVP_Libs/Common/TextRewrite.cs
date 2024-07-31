@@ -1,6 +1,5 @@
 ﻿using NVP.API.Nodes;
 
-using System;
 using System.Collections.Generic;
 using System.IO;
 
@@ -16,17 +15,17 @@ namespace NVP_Libs.Common
         {
             string link = (string)inputs[0].Value;
             string text = (string)inputs[1].Value;
-            bool perezapis = (bool)inputs[2].Value;
+            bool rewrite = (bool)inputs[2].Value;
             if (File.Exists(link))
             {
-                if (perezapis == true)
+                if (rewrite == true)
                 {
                     File.WriteAllText(link, text);
                 }
                 else
                 {
                     string existingText = File.ReadAllText(link);
-                    string newText = existingText + text.Replace("^Z", Environment.NewLine);
+                    string newText = existingText + "\n" + text;
                     File.WriteAllText(link, newText);
                 }
             }

@@ -184,7 +184,6 @@
     <Compile Include="Common\ExelParceXLS.cs" />
     <Compile Include="Common\TextRewrite.cs" />
     <Compile Include="Common\TextWatch.cs" />
-    <Compile Include="Common\TextRedactor.cs" />
     <Compile Include="Common\WritingArrayExcel.cs" />
     <Compile Include="ExampleNanocad.cs" />
     <Compile Include="ExampleRevit.cs" />

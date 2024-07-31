@@ -5,7 +5,7 @@ using System.IO;
 
 namespace NVP_Libs.Common
 {
-    [NodeInput("полный путь до файла", typeof(string))]
+    [NodeInput("полный путь", typeof(string))]
     [NodeInput("разделитель", typeof(char))]
     public class ExcelParceCSV : INode
     {

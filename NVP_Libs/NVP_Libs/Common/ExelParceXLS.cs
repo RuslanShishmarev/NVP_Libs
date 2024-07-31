@@ -7,7 +7,7 @@ using System.IO;
 
 namespace NVP_Libs.Common
 {
-    [NodeInput("полный путь до файла", typeof(string))]
+    [NodeInput("полный путь", typeof(string))]
     public class ExcelParceXLS : INode
     {
         public NodeResult Execute(INVPData context, List<NodeResult> inputs)

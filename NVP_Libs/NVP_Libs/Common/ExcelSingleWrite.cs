@@ -8,7 +8,7 @@ using System.IO;
 namespace NVP_Libs.Common
 {
     [NodeInput("полный путь", typeof(string))]
-    [NodeInput("текст который вводим", typeof(string))]
+    [NodeInput("текст", typeof(string))]
     [NodeInput("клетка", typeof(string))]
     [NodeInput("имя листа", typeof(string))]
     public class ExcelSingleWrite : INode
