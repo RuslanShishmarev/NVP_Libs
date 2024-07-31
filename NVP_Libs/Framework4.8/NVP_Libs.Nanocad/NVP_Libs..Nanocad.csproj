@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{8CA2F9A0-F250-4B67-8143-8FF16A28E09F}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>NVP_Libs.Nanocad</RootNamespace>
+    <AssemblyName>NVP_Libs.Nanocad</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="hostdbmgd">
+      <HintPath>Nanocad\nanolibs\hostdbmgd.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="hostmgd">
+      <HintPath>Nanocad\nanolibs\hostmgd.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="imapimgd">
+      <HintPath>Nanocad\nanolibs\imapimgd.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="mapibasetypes">
+      <HintPath>Nanocad\nanolibs\mapibasetypes.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="mapimgd">
+      <HintPath>Nanocad\nanolibs\mapimgd.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="ncBIMSmgd">
+      <HintPath>Nanocad\nanolibs\ncBIMSmgd.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="nrxgatemgd, Version=1.0.0.0, Culture=neutral, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Nanocad\nanolibs\nrxgatemgd.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="NVP.API">
+      <HintPath>..\..\..\..\..\..\..\..\Program Files\NVP\framework4.8\NVP.API.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Packaging, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.Packaging.6.0.0\lib\net461\System.IO.Packaging.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Windows" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CreateConcreteColumn.cs" />
+    <Compile Include="CreateConcretePlate.cs" />
+    <Compile Include="CreateLines.cs" />
+    <Compile Include="CreateWall.cs" />
+    <Compile Include="CreateLine.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="nanolibs\hostdbmgd.dll" />
+    <Content Include="nanolibs\hostmgd.dll" />
+    <Content Include="nanolibs\imapimgd.dll" />
+    <Content Include="nanolibs\mapibasetypes.dll" />
+    <Content Include="nanolibs\mapimgd.dll" />
+    <Content Include="nanolibs\ncBIMSmgd.dll" />
+    <Content Include="nanolibs\nrxgatemgd.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="NanocadNodes.nodeitem" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>copy $(TargetPath) $(SolutionDir)\Framework4.8\ready_build
+copy "$(ProjectDir)*.nodeitem" $(SolutionDir)\Framework4.8\ready_build</PostBuildEvent>
+  </PropertyGroup>
+</Project>

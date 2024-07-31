@@ -6,11 +6,10 @@
 /.vs/NVP_Libs/v17
 /.vs
 /NVP_Libs/.vs/NVP_Libs
-/NVP_Libs/NVP_Libs/obj/Debug
-/NVP_Libs/NVP_Libs/bin/Debug
-/NVP_Libs/NVP_Libs/.vs
+/NVP_Libs/Framework4.8/NVP_Libs.Nanocad/obj/Debug
+/NVP_Libs/Framework4.8/NVP_Libs.Nanocad/bin/Debug
+/NVP_Libs/Framework4.8/NVP_Libs.Nanocad/.vs
 /NVP_Libs/packages
 *.user
 
 *.htm
-/NVP_Libs/Framework4.8/NVP_Libs.Nanocad/bin/Debug

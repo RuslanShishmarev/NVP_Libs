@@ -1,0 +1,8 @@
+C:\Users\Admin\source\repos\NVP_Libs\NVP_Libs\Framework4.8\NVP_Libs.Revit\obj\Debug\NVP_Libs.Revit.csproj.AssemblyReference.cache
+C:\Users\Admin\source\repos\NVP_Libs\NVP_Libs\Framework4.8\NVP_Libs.Revit\obj\Debug\NVP_Libs.Revit.csproj.CoreCompileInputs.cache
+C:\Users\Admin\source\repos\NVP_Libs\NVP_Libs\Framework4.8\NVP_Libs.Revit\bin\Debug\NVP_Libs.Revit.dll
+C:\Users\Admin\source\repos\NVP_Libs\NVP_Libs\Framework4.8\NVP_Libs.Revit\bin\Debug\NVP_Libs.Revit.pdb
+C:\Users\Admin\source\repos\NVP_Libs\NVP_Libs\Framework4.8\NVP_Libs.Revit\bin\Debug\NVP.API.dll
+C:\Users\Admin\source\repos\NVP_Libs\NVP_Libs\Framework4.8\NVP_Libs.Revit\obj\Debug\NVP_Libs.Revit.csproj.CopyComplete
+C:\Users\Admin\source\repos\NVP_Libs\NVP_Libs\Framework4.8\NVP_Libs.Revit\obj\Debug\NVP_Libs.Revit.dll
+C:\Users\Admin\source\repos\NVP_Libs\NVP_Libs\Framework4.8\NVP_Libs.Revit\obj\Debug\NVP_Libs.Revit.pdb
