@@ -35,7 +35,7 @@ namespace NVP_Libs.Revit.Architecture
             CurveArray footPrint = new CurveArray();
             for (int i = 0; i < revitPoints.Count; i++)
             {
-                int nextIndex = (i + 1) % points.Count;
+                int nextIndex = (i + 1) % revitPoints.Count;
                 RevitLine line = RevitLine.CreateBound(revitPoints[i], revitPoints[nextIndex]);
                 footPrint.Append(line);
             }

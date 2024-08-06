@@ -64,6 +64,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Architecture\CreateRoomByLevel.cs" />
+    <Compile Include="Architecture\CreateRoomPlanCircuit.cs" />
+    <Compile Include="Architecture\CreateRoomSeparator.cs" />
     <Compile Include="Common\ChangeParameter.cs" />
     <Compile Include="Architecture\CreateDefaultWallNonRectangular.cs" />
     <Compile Include="Architecture\CreateDefaultWallRectengular.cs" />
@@ -72,6 +75,7 @@
     <Compile Include="Architecture\CreateWallNonRectangular.cs" />
     <Compile Include="Architecture\CreateWallNonRectangularVector.cs" />
     <Compile Include="Architecture\CreateWalls.cs" />
+    <Compile Include="Common\GetCurveByElement.cs" />
     <Compile Include="Common\GetElement.cs" />
     <Compile Include="Common\GetElementById.cs" />
     <Compile Include="Common\GetElementsByBuiltInCategory.cs" />
@@ -96,7 +100,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>copy $(TargetPath) $(SolutionDir)\Framework4.8\ready_build
-copy "$(ProjectDir)*.nodeitem" $(SolutionDir)\Framework4.8\ready_build</PostBuildEvent>
+    <PostBuildEvent>copy $(TargetPath) C:\ProgramData\NVP\framework4.8\libs
+copy "$(ProjectDir)*.nodeitem" C:\ProgramData\NVP\framework4.8\libs</PostBuildEvent>
   </PropertyGroup>
 </Project>
