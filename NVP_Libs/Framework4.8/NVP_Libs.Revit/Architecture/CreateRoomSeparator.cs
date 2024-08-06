@@ -30,7 +30,13 @@ namespace NVP_Libs.Revit.Architecture
                 .FirstOrDefault(v => v.Name == viewName);
 
             var inputType = inputs[0].ValueType;
-            if (inputType == typeof(Curve)) 
+            if (inputType == typeof(Line) 
+                || inputType == typeof(Arc) 
+                || inputType == typeof(Curve) 
+                || inputType == typeof(Ellipse) 
+                || inputType == typeof(HermiteSpline) 
+                || inputType == typeof(NurbSpline) 
+                || inputType == typeof(CylindricalHelix)) 
             {
                 var curve = (Curve)inputs[0].Value;
                 curveArray.Append(curve);
