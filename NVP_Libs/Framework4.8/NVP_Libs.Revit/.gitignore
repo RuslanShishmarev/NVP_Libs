@@ -1,4 +1,4 @@
 ﻿*.dll
-/bin\Debug
-/obj\Debug
-/.vc
+bin\Debug/
+obj\Debug/
+.vc/
