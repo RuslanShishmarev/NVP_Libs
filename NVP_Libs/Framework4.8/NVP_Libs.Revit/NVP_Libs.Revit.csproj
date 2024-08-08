@@ -75,6 +75,8 @@
     <Compile Include="Architecture\CreateWallNonRectangular.cs" />
     <Compile Include="Architecture\CreateWallNonRectangularVector.cs" />
     <Compile Include="Architecture\CreateWalls.cs" />
+    <Compile Include="Common\ConvertLineToRevit.cs" />
+    <Compile Include="Common\ConvertXYZToRevit.cs" />
     <Compile Include="Common\GetCurveByElement.cs" />
     <Compile Include="Common\GetElement.cs" />
     <Compile Include="Common\GetElementById.cs" />
@@ -95,6 +97,7 @@
     <Compile Include="Services\ConvertNVPToRevit.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include=".gitignore" />
     <None Include="packages.config" />
     <None Include="RevitNodes.nodeitem" />
   </ItemGroup>

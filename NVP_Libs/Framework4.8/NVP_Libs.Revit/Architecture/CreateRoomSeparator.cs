@@ -9,7 +9,6 @@ using System.Linq;
 namespace NVP_Libs.Revit.Architecture
 {
     [NodeInput("кривые", typeof(List<Curve>))]
-    [NodeInput("название эскиза", typeof(string))]
     [NodeInput("название вида", typeof(string))]
     internal class CreateRoomSeparator : INode
     {
@@ -18,16 +17,12 @@ namespace NVP_Libs.Revit.Architecture
             var doc = (context.GetCADContext() as ExternalCommandData).Application.ActiveUIDocument.Document;
             CurveArray curveArray = new CurveArray();
 
-            var sketchPlaneName = (string)inputs[1].Value;
-            var sketchPlane = new FilteredElementCollector(doc)
-                .OfClass(typeof(SketchPlane))
-                .Cast<SketchPlane>()
-                .FirstOrDefault(sp => sp.Name == sketchPlaneName);
-            var viewName = (string)inputs[2].Value;
+            var viewName = (string)inputs[1].Value;
             var view = new FilteredElementCollector(doc)
                 .OfClass(typeof(View))
                 .Cast<View>()
                 .FirstOrDefault(v => v.Name == viewName);
+            var sketchPlane = view.SketchPlane;
 
             var inputType = inputs[0].ValueType;
             if (inputType == typeof(Line) 
