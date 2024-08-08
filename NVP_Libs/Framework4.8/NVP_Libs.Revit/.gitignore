@@ -1,0 +1,4 @@
+﻿*.dll
+/bin\Debug
+/obj\Debug
+/.vc
