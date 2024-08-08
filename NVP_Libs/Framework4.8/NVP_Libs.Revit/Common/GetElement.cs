@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace NVP_Libs.Revit.Common
 {
-    internal class GetElement : INode
+    public class GetElement : INode
     {
         public NodeResult Execute(INVPData context, List<NodeResult> inputs)
         {

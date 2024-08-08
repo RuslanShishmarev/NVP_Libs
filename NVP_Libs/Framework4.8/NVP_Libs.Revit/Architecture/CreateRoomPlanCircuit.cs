@@ -9,7 +9,7 @@ using System.Collections.Generic;
 namespace NVP_Libs.Revit.Architecture
 {
     [NodeInput("уровень", typeof(Level))]
-    internal class CreateRoomPlanCircuit : INode
+    public class CreateRoomPlanCircuit : INode
     {
         public NodeResult Execute(INVPData context, List<NodeResult> inputs)
         {

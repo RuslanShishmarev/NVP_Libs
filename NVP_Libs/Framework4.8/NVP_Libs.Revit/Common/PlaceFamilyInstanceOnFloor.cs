@@ -2,22 +2,20 @@
 using Autodesk.Revit.UI;
 
 using NVP.API.Nodes;
-using NVP_Libs.Revit.Services;
 
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
 using RevitXYZ = Autodesk.Revit.DB.XYZ;
-using XYZ = NVP.API.Geometry.XYZ;
 
 namespace NVP_Libs.Revit.Common
 {
     [NodeInput("элемент", typeof(Floor))]
     [NodeInput("верхняя грань", typeof(bool))]
     [NodeInput("типоразмер", typeof(FamilySymbol))]
-    [NodeInput("координата", typeof(XYZ))]
-    [NodeInput("вектор", typeof(XYZ))]
+    [NodeInput("координата", typeof(RevitXYZ))]
+    [NodeInput("вектор", typeof(RevitXYZ))]
     public class PlaceFamilyInstanceOnFloor : INode
     {
         public NodeResult Execute(INVPData context, List<NodeResult> inputs)
@@ -27,11 +25,9 @@ namespace NVP_Libs.Revit.Common
             var element = (Floor)inputs[0].Value;
             var side = (bool)inputs[1].Value;
             var familySymbol = (FamilySymbol)inputs[2].Value;
-            var point = (XYZ)inputs[3].Value;
-            var vector = (XYZ)inputs[4].Value;
+            var point = (RevitXYZ)inputs[3].Value;
+            var vector = (RevitXYZ)inputs[4].Value;
 
-            RevitXYZ revitPoint = point.ToRevit();
-            RevitXYZ revitVector = vector.ToRevit();
             Options geometryOptions = new Options();
             geometryOptions.ComputeReferences = true;
 
@@ -44,12 +40,12 @@ namespace NVP_Libs.Revit.Common
                 {
                     if (CheckAngle(side, face))
                     {
-                        IntersectionResult result = face.Project(revitPoint);
+                        IntersectionResult result = face.Project(point);
                         if (result != null)
                         {
                             RevitXYZ pointProjection = result.XYZPoint;
                             transaction.Start();
-                            var instance = doc.Create.NewFamilyInstance(face, pointProjection, revitVector, familySymbol);
+                            var instance = doc.Create.NewFamilyInstance(face, pointProjection, vector, familySymbol);
                             transaction.Commit();
                             return new NodeResult(instance);
                         }

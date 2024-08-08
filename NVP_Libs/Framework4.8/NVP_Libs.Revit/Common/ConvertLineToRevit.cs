@@ -1,11 +1,10 @@
-﻿using NVP.API.Nodes;
-using NVP.API.Geometry;
+﻿using NVP.API.Geometry;
+using NVP.API.Nodes;
 
 using System.Collections.Generic;
 
-using RevitXYZ = Autodesk.Revit.DB.XYZ;
-using XYZ = NVP.API.Geometry.XYZ;
 using RevitLine = Autodesk.Revit.DB.Line;
+using RevitXYZ = Autodesk.Revit.DB.XYZ;
 
 namespace NVP_Libs.Revit.Common
 {

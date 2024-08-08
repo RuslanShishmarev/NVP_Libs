@@ -10,7 +10,7 @@ namespace NVP_Libs.Revit.Architecture
 {
     [NodeInput("кривые", typeof(List<Curve>))]
     [NodeInput("название вида", typeof(string))]
-    internal class CreateRoomSeparator : INode
+    public class CreateRoomSeparator : INode
     {
         public NodeResult Execute(INVPData context, List<NodeResult> inputs)
         {

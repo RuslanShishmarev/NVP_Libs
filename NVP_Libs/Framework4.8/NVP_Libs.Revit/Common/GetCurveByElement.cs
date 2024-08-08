@@ -7,7 +7,7 @@ using System.Collections.Generic;
 namespace NVP_Libs.Revit.Common
 {
     [NodeInput("элемент", typeof(Element))]
-    internal class GetCurveByElement : INode
+    public class GetCurveByElement : INode
     {
         public NodeResult Execute(INVPData context, List<NodeResult> inputs)
         {

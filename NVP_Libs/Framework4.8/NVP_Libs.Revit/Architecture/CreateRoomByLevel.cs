@@ -12,7 +12,7 @@ namespace NVP_Libs.Revit.Architecture
 {
     [NodeInput("точка", typeof(RevitXYZ))]
     [NodeInput("уровень", typeof(Level))]
-    internal class CreateRoomByLevel : INode
+    public class CreateRoomByLevel : INode
     {
         public NodeResult Execute(INVPData context, List<NodeResult> inputs)
         {
