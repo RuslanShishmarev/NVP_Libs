@@ -14,9 +14,6 @@
 *.user
 
 *.htm
-/NVP_Libs/Framework4.8/NVP_Libs.Revit/obj/Debug/NVP_Libs.Revit.pdb
-/NVP_Libs/Framework4.8/NVP_Libs.Revit/obj/Debug/NVP_Libs.Revit.csproj.AssemblyReference.cache
-/NVP_Libs/Framework4.8/NVP_Libs.Revit/obj/Debug/NVP_Libs.Revit.dll
-/NVP_Libs/Framework4.8/NVP_Libs.Revit/bin/Debug/NVP_Libs.Revit.pdb
-/NVP_Libs/Framework4.8/NVP_Libs.Revit/bin/Debug/NVP_Libs.Revit.dll
-/NVP_Libs/Framework4.8/NVP_Libs.Revit/bin/Debug/NVP.API.dll
+/NVP_Libs/Framework4.8/NVP_Libs.Revit/obj/
+/NVP_Libs/Framework4.8/NVP_Libs.Revit/bin/
+/NVP_Libs/Framework4.8/NVP_Libs.Revit/.vs
