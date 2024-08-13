@@ -2,42 +2,28 @@
 using Autodesk.Revit.UI;
 
 using NVP.API.Nodes;
-using NVP_Libs.Revit.Services;
 
 using System.Collections.Generic;
 using System.Linq;
 
-using RevitLine = Autodesk.Revit.DB.Line;
-using RevitXYZ = Autodesk.Revit.DB.XYZ;
-using XYZ = NVP.API.Geometry.XYZ;
-
 namespace NVP_Libs.Revit.Architecture
 {
-    [NodeInput("контур", typeof(List<XYZ>))]
+    [NodeInput("контур", typeof(List<Curve>))]
     [NodeInput("тип крыши", typeof(string))]
     [NodeInput("уровень", typeof(Level))]
-    internal class CreateRoof : INode
+    public class CreateRoof : INode
     {
         public NodeResult Execute(INVPData context, List<NodeResult> inputs)
         {
             var doc = (context.GetCADContext() as ExternalCommandData).Application.ActiveUIDocument.Document;
 
-            var points = (inputs[0].Value as IEnumerable<object>).Cast<XYZ>().ToList();
+            var curves = (inputs[0].Value as IEnumerable<object>).Cast<Curve>().ToList();
             var roofTypeName = (string)inputs[1].Value;
             var level = (Level)inputs[2].Value;
-            var revitPoints = new List<RevitXYZ>();
-
-            foreach (XYZ point in points)
-            {
-                RevitXYZ revitPoint = point.ToRevit();
-                revitPoints.Add(revitPoint);
-            }
             CurveArray footPrint = new CurveArray();
-            for (int i = 0; i < revitPoints.Count; i++)
+            for (int i = 0; i < curves.Count; i++)
             {
-                int nextIndex = (i + 1) % points.Count;
-                RevitLine line = RevitLine.CreateBound(revitPoints[i], revitPoints[nextIndex]);
-                footPrint.Append(line);
+                footPrint.Append(curves[i]);
             }
 
             RoofType roofType = new FilteredElementCollector(doc)

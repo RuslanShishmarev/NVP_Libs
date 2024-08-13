@@ -10,7 +10,7 @@ namespace NVP_Libs.Revit.Common
 {
     [NodeInput("параметр", typeof(Parameter))]
     [NodeInput("новое значение", typeof(object))]
-    internal class ChangeParameter : INode
+    public class ChangeParameter : INode
     {
         public NodeResult Execute(INVPData context, List<NodeResult> inputs)
         {

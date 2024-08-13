@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace NVP_Libs.Revit.Common
 {
-    internal class GetXYZ : INode
+    public class GetXYZ : INode
     {
         public NodeResult Execute(INVPData context, List<NodeResult> inputs)
         {
@@ -15,9 +15,8 @@ namespace NVP_Libs.Revit.Common
             var selection = uiDoc.Selection;
 
             var pickPoint = selection.PickPoint(ObjectSnapTypes.Nearest, "Выберите точку");
-            var nvpPickPoint = context.CreatePoint(pickPoint.X, pickPoint.Y, pickPoint.Z);
 
-            return new NodeResult(nvpPickPoint);
+            return new NodeResult(pickPoint);
         }
     }
 }

@@ -2,18 +2,14 @@
 using Autodesk.Revit.UI;
 
 using NVP.API.Nodes;
-using NVP_Libs.Revit.Services;
 
 using System.Collections.Generic;
 using System.Linq;
 
-using Line = NVP.API.Geometry.Line;
-using RevitLine = Autodesk.Revit.DB.Line;
-
 namespace NVP_Libs.Revit.Architecture
 {
     [NodeInput("тип стены", typeof(string))]
-    [NodeInput("линия", typeof(Line))]
+    [NodeInput("линия построения", typeof(Curve))]
     [NodeInput("уровень", typeof(Level))]
     [NodeInput("высота", typeof(double))]
     [NodeInput("смещение", typeof(double))]
@@ -26,7 +22,7 @@ namespace NVP_Libs.Revit.Architecture
             var doc = (context.GetCADContext() as ExternalCommandData).Application.ActiveUIDocument.Document;
 
             var wallName = (string)inputs[0].Value;
-            var line = (Line)inputs[1].Value;
+            var curve = (Curve)inputs[1].Value;
             var level = (Level)inputs[2].Value;
             var height = (double)inputs[3].Value;
             var offset = (double)inputs[4].Value;
@@ -42,8 +38,7 @@ namespace NVP_Libs.Revit.Architecture
             using (Transaction transaction = new Transaction(doc, "Создание стены"))
             {
                 transaction.Start();
-                RevitLine revitLine = line.ToRevit();
-                Wall wall = Wall.Create(doc, revitLine, wallTypeId, levelId, height, offset, flip, structural);
+                Wall wall = Wall.Create(doc, curve, wallTypeId, levelId, height, offset, flip, structural);
                 transaction.Commit();
                 return new NodeResult(wall);
             }

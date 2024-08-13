@@ -14,3 +14,6 @@
 *.user
 
 *.htm
+/NVP_Libs/Framework4.8/NVP_Libs.Revit/obj/
+/NVP_Libs/Framework4.8/NVP_Libs.Revit/bin/
+/NVP_Libs/Framework4.8/NVP_Libs.Revit/.vs

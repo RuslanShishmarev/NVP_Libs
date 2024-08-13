@@ -2,45 +2,26 @@
 using Autodesk.Revit.UI;
 
 using NVP.API.Nodes;
-using NVP_Libs.Revit.Services;
 
 using System.Collections.Generic;
 using System.Linq;
 
-using RevitLine = Autodesk.Revit.DB.Line;
-using RevitXYZ = Autodesk.Revit.DB.XYZ;
-using XYZ = NVP.API.Geometry.XYZ;
-
 namespace NVP_Libs.Revit.Architecture
 {
-    [NodeInput("профиль", typeof(List<XYZ>))]
+    [NodeInput("профиль", typeof(List<Curve>))]
     [NodeInput("тип стены", typeof(string))]
     [NodeInput("уровень", typeof(Level))]
     [NodeInput("несущая", typeof(bool))]
-    internal class CreateWallNonRectangular : INode
+    public class CreateWallNonRectangular : INode
     {
         public NodeResult Execute(INVPData context, List<NodeResult> inputs)
         {
             var doc = (context.GetCADContext() as ExternalCommandData).Application.ActiveUIDocument.Document;
 
-            var points = (inputs[0].Value as IEnumerable<object>).Cast<XYZ>().ToList();
+            var profile = (inputs[0].Value as IEnumerable<object>).Cast<Curve>().ToList();
             var wallTypeName = (string)inputs[1].Value;
             var levelId = (inputs[2].Value as Element).Id;
             var structural = (bool)inputs[3].Value;
-            var revitPoints = new List<RevitXYZ>();
-            IList<Curve> profile = new List<Curve>();
-
-            foreach (XYZ point in points)
-            {
-                RevitXYZ revitPoint = point.ToRevit();
-                revitPoints.Add(revitPoint);
-            }
-            for (int i = 0; i < revitPoints.Count; i++)
-            {
-                int nextIndex = (i + 1) % revitPoints.Count;
-                RevitLine line = RevitLine.CreateBound(revitPoints[i], revitPoints[nextIndex]);
-                profile.Add(line);
-            }
 
             WallType wallType = new FilteredElementCollector(doc)
                 .OfClass(typeof(WallType))
