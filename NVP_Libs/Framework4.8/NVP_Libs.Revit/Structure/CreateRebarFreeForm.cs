@@ -10,28 +10,30 @@ using System.Linq;
 
 namespace NVP_Libs.Revit.Structure
 {
-    [NodeInput("профили", typeof(List<List<Curve>>))]
-    [NodeInput("тип арматуры", typeof(string))]
+    [NodeInput("профиль", typeof(List<List<Curve>>))]
+    [NodeInput("тип арматуры", typeof(RebarBarType))]
     [NodeInput("элемент", typeof(Element))]
-    internal class CreateRebarFreeForm : INode
+    public class CreateRebarFreeForm : INode
     {
         public NodeResult Execute(INVPData context, List<NodeResult> inputs)
         {
             var doc = (context.GetCADContext() as ExternalCommandData).Application.ActiveUIDocument.Document;
 
-            var curves = (inputs[0].Value as IEnumerable<object>).Cast<IList<Curve>>().ToList();
-            var rebarBarTypeName = (string)inputs[1].Value;
-            var rebarBarType = new FilteredElementCollector(doc)
-                .OfClass(typeof(RebarBarType))
-                .Cast<RebarBarType>()
-                .FirstOrDefault(bt => bt.Name == rebarBarTypeName);
+            var curves = (inputs[0].Value as IEnumerable<object>).Cast<List<object>>().ToList();
+            var profile = new List<IList<Curve>>();
+            for (int i = 0; i < curves.Count; i++)
+            {
+                var list = curves[i].Cast<Curve>().ToList();
+                profile.Add(list);
+            }
+            var rebarBarType = (RebarBarType)inputs[1].Value;
             var host = (Element)inputs[2].Value;
             var validationResult = new RebarFreeFormValidationResult();
 
             using (Transaction transaction = new Transaction(doc, "Создание арматуры свободной формы"))
             {
                 transaction.Start();
-                Rebar rebar = Rebar.CreateFreeForm(doc, rebarBarType, host, curves, out validationResult);
+                Rebar rebar = Rebar.CreateFreeForm(doc, rebarBarType, host, profile, out validationResult);
                 transaction.Commit();
                 return new NodeResult(rebar);
             }

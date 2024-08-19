@@ -10,8 +10,8 @@ using System.Linq;
 namespace NVP_Libs.Revit.Structure
 {
     [NodeInput("тип отгиба", typeof(string))]
-    [NodeInput("левый/правый", typeof(bool))]
-    internal class SetHook : INode
+    [NodeInput("лево/право", typeof(bool))]
+    public class SetHook : INode
     {
         public NodeResult Execute(INVPData context, List<NodeResult> inputs)
         {

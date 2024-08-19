@@ -67,7 +67,6 @@
     <Compile Include="Architecture\CreateRoomByLevel.cs" />
     <Compile Include="Architecture\CreateRoomPlanCircuit.cs" />
     <Compile Include="Architecture\CreateRoomSeparator.cs" />
-    <Compile Include="Common\CastListToCurve.cs" />
     <Compile Include="Common\ChangeParameter.cs" />
     <Compile Include="Architecture\CreateDefaultWallNonRectangular.cs" />
     <Compile Include="Architecture\CreateDefaultWallRectengular.cs" />
@@ -96,15 +95,17 @@
     <Compile Include="Common\PlaceFamilyInstanceXYZ.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ConvertNVPToRevit.cs" />
-    <Compile Include="Structure\Create2DBeamSystem.cs" />
     <Compile Include="Structure\CreateBeamSystemByLevelInt.cs" />
     <Compile Include="Structure\CreateBeamSystemByLevelVector.cs" />
-    <Compile Include="Structure\CreateBeamSystemBySketchPlane.cs" />
+    <Compile Include="Structure\Create2DBeamSystem.cs" />
     <Compile Include="Structure\CreateRebarFreeForm.cs" />
     <Compile Include="Structure\CreateRebarFreeFormCurveLoop.cs" />
     <Compile Include="Structure\CreateRebarFromCurvesAndShape.cs" />
     <Compile Include="Structure\CreateRebarFromCurves.cs" />
+    <Compile Include="Structure\CreateWallFoundation.cs" />
     <Compile Include="Structure\SetHook.cs" />
+    <Compile Include="Structure\SetRebarBarType.cs" />
+    <Compile Include="Structure\SetRebarShape.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitignore" />

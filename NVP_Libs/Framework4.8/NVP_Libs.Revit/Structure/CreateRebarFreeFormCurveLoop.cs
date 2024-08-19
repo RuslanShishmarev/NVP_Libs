@@ -10,21 +10,17 @@ using System.Linq;
 
 namespace NVP_Libs.Revit.Structure
 {
-    [NodeInput("профили", typeof(List<CurveLoop>))]
-    [NodeInput("тип арматуры", typeof(string))]
+    [NodeInput("профиль", typeof(List<CurveLoop>))]
+    [NodeInput("тип арматуры", typeof(RebarBarType))]
     [NodeInput("элемент", typeof(Element))]
-    internal class CreateRebarFreeFormCurveLoop : INode
+    public class CreateRebarFreeFormCurveLoop : INode
     {
         public NodeResult Execute(INVPData context, List<NodeResult> inputs)
         {
             var doc = (context.GetCADContext() as ExternalCommandData).Application.ActiveUIDocument.Document;
 
             var curves = (inputs[0].Value as IEnumerable<object>).Cast<CurveLoop>().ToList();
-            var rebarBarTypeName = (string)inputs[1].Value;
-            var rebarBarType = new FilteredElementCollector(doc)
-                .OfClass(typeof(RebarBarType))
-                .Cast<RebarBarType>()
-                .FirstOrDefault(bt => bt.Name == rebarBarTypeName);
+            var rebarBarType = (RebarBarType)inputs[1].Value;
             var host = (Element)inputs[2].Value;
             var validationResult = new RebarFreeFormValidationResult();
 

@@ -11,26 +11,22 @@ using RevitXYZ = Autodesk.Revit.DB.XYZ;
 
 namespace NVP_Libs.Revit.Structure
 {
-    [NodeInput("профили", typeof(List<Curve>))]
-    [NodeInput("тип арматуры", typeof(string))]
+    [NodeInput("профиль", typeof(List<Curve>))]
+    [NodeInput("тип арматуры", typeof(RebarBarType))]
     [NodeInput("стандартный стержень", typeof(bool))]
     [NodeInput("элемент", typeof(Element))]
     [NodeInput("нормаль", typeof(RevitXYZ))]
     [NodeInput("отгиб 1", typeof(List<object>))]
     [NodeInput("отгиб 2", typeof(List<object>))]
 
-    internal class CreateRebarFromCurves : INode
+    public class CreateRebarFromCurves : INode
     {
         public NodeResult Execute(INVPData context, List<NodeResult> inputs)
         {
             var doc = (context.GetCADContext() as ExternalCommandData).Application.ActiveUIDocument.Document;
 
             var curves = (inputs[0].Value as IEnumerable<object>).Cast<Curve>().ToList();
-            var rebarBarTypeName = (string)inputs[1].Value;
-            var rebarBarType = new FilteredElementCollector(doc)
-                .OfClass(typeof(RebarBarType))
-                .Cast<RebarBarType>()
-                .FirstOrDefault(bt => bt.Name == rebarBarTypeName);
+            var rebarBarType = (RebarBarType)inputs[1].Value;
             var rebarStyle = (bool)inputs[2].Value;
             RebarStyle style = RebarStyle.Standard;
             if (!rebarStyle)
