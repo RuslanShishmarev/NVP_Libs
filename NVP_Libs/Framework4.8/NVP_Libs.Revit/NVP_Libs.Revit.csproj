@@ -103,6 +103,7 @@
     <Compile Include="Structure\CreateRebarFromCurvesAndShape.cs" />
     <Compile Include="Structure\CreateRebarFromCurves.cs" />
     <Compile Include="Structure\CreateWallFoundation.cs" />
+    <Compile Include="Structure\GetWallFoundationType.cs" />
     <Compile Include="Structure\SetHook.cs" />
     <Compile Include="Structure\SetRebarBarType.cs" />
     <Compile Include="Structure\SetRebarShape.cs" />

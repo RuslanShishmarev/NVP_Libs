@@ -2,6 +2,7 @@
 using Autodesk.Revit.UI;
 
 using NVP.API.Nodes;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,7 @@ using RevitXYZ = Autodesk.Revit.DB.XYZ;
 namespace NVP_Libs.Revit.Structure
 {
     [NodeInput("профиль", typeof(List<Curve>))]
-    [NodeInput("индекс направляющей", typeof(double))]
+    [NodeInput("индекс направляющей", typeof(int))]
     public class Create2DBeamSystem : INode
     {
         public NodeResult Execute(INVPData context, List<NodeResult> inputs)

@@ -11,7 +11,7 @@ namespace NVP_Libs.Revit.Structure
 {
     [NodeInput("профиль", typeof(List<Curve>))]
     [NodeInput("уровень", typeof(Level))]
-    [NodeInput("индекс направляющей", typeof(double))]
+    [NodeInput("индекс направляющей", typeof(int))]
     [NodeInput("3D", typeof(bool))]
     public class CreateBeamSystemByLevelInt : INode
     {

@@ -4,12 +4,10 @@ using Autodesk.Revit.UI;
 using NVP.API.Nodes;
 
 using System.Collections.Generic;
-using System.Linq;
-
 
 namespace NVP_Libs.Revit.Structure
 {
-    [NodeInput("тип фундамента", typeof(string))]
+    [NodeInput("тип фундамента", typeof(WallFoundationType))]
     [NodeInput("стена", typeof(Wall))]
     public class CreateWallFoundation : INode
     {
@@ -17,10 +15,7 @@ namespace NVP_Libs.Revit.Structure
         {
             var doc = (context.GetCADContext() as ExternalCommandData).Application.ActiveUIDocument.Document;
 
-            var foundationTypeName = (string)inputs[0].Value;
-            var foundationType = new FilteredElementCollector(doc)
-                .OfClass(typeof(WallFoundationType))
-                .FirstOrDefault(f => f.Name == foundationTypeName);
+            var foundationType = (WallFoundationType)inputs[0].Value;
             var foundationTypeId = foundationType.Id;
             var wall = inputs[1].Value as Element;
             var wallId = wall.Id;
