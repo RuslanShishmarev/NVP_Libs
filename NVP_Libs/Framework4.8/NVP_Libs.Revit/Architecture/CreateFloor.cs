@@ -6,11 +6,10 @@ using NVP.API.Nodes;
 using System.Collections.Generic;
 using System.Linq;
 
-
 namespace NVP_Libs.Revit.Architecture
 {
     [NodeInput("контур", typeof(List<Curve>))]
-    [NodeInput("тип перекрытия", typeof(string))]
+    [NodeInput("тип перекрытия", typeof(FloorType))]
     [NodeInput("уровень", typeof(Level))]
     [NodeInput("несущая", typeof(bool))]
     public class CreateFloor : INode
@@ -20,7 +19,7 @@ namespace NVP_Libs.Revit.Architecture
             var doc = (context.GetCADContext() as ExternalCommandData).Application.ActiveUIDocument.Document;
 
             var curves = (inputs[0].Value as IEnumerable<object>).Cast<Curve>().ToList();
-            var floorTypeName = (string)inputs[1].Value;
+            var floorType = (FloorType)inputs[1].Value;
             var level = inputs[2].Value as Level;
             var structural = (bool)inputs[3].Value;
             CurveArray profile = new CurveArray();
@@ -29,11 +28,6 @@ namespace NVP_Libs.Revit.Architecture
                 profile.Append(curves[i]);
             }
 
-            FloorType floorType = new FilteredElementCollector(doc)
-                .OfClass(typeof(FloorType))
-                .OfType<FloorType>()
-                .FirstOrDefault(f => f.Name == floorTypeName);
-
             using (Transaction transaction = new Transaction(doc, "Создание перекрытия"))
             {
                 transaction.Start();
@@ -41,7 +35,6 @@ namespace NVP_Libs.Revit.Architecture
                 transaction.Commit();
                 return new NodeResult(floor);
             }
-
         }
     }
 }

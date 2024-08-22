@@ -10,7 +10,7 @@ using System.Linq;
 namespace NVP_Libs.Revit.Structure
 {
     [NodeInput("форма стержня", typeof(string))]
-    public class SetRebarShape : INode
+    public class GetRebarShapeByName : INode
     {
         public NodeResult Execute(INVPData context, List<NodeResult> inputs)
         {

@@ -11,7 +11,7 @@ using System.Linq;
 namespace NVP_Libs.Revit.Structure
 {
     [NodeInput("тип арматуры", typeof(string))]
-    public class SetRebarBarType : INode
+    public class GetBarTypeByName : INode
     {
         public NodeResult Execute(INVPData context, List<NodeResult> inputs)
         {

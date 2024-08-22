@@ -67,6 +67,9 @@
     <Compile Include="Architecture\CreateRoomByLevel.cs" />
     <Compile Include="Architecture\CreateRoomPlanCircuit.cs" />
     <Compile Include="Architecture\CreateRoomSeparator.cs" />
+    <Compile Include="Architecture\GetFloorTypeByName.cs" />
+    <Compile Include="Architecture\GetRoofTypeByName.cs" />
+    <Compile Include="Architecture\GetWallTypeByName.cs" />
     <Compile Include="Common\ChangeParameter.cs" />
     <Compile Include="Architecture\CreateDefaultWallNonRectangular.cs" />
     <Compile Include="Architecture\CreateDefaultWallRectengular.cs" />
@@ -103,10 +106,10 @@
     <Compile Include="Structure\CreateRebarFromCurvesAndShape.cs" />
     <Compile Include="Structure\CreateRebarFromCurves.cs" />
     <Compile Include="Structure\CreateWallFoundation.cs" />
+    <Compile Include="Structure\GetBarTypeByName.cs" />
     <Compile Include="Structure\GetWallFoundationType.cs" />
     <Compile Include="Structure\SetHook.cs" />
-    <Compile Include="Structure\SetRebarBarType.cs" />
-    <Compile Include="Structure\SetRebarShape.cs" />
+    <Compile Include="Structure\GetRebarShapeByName.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitignore" />

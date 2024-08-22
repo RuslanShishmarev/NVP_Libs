@@ -4,11 +4,10 @@ using Autodesk.Revit.UI;
 using NVP.API.Nodes;
 
 using System.Collections.Generic;
-using System.Linq;
 
 namespace NVP_Libs.Revit.Architecture
 {
-    [NodeInput("тип стены", typeof(string))]
+    [NodeInput("тип стены", typeof(WallType))]
     [NodeInput("линия построения", typeof(Curve))]
     [NodeInput("уровень", typeof(Level))]
     [NodeInput("высота", typeof(double))]
@@ -21,18 +20,14 @@ namespace NVP_Libs.Revit.Architecture
         {
             var doc = (context.GetCADContext() as ExternalCommandData).Application.ActiveUIDocument.Document;
 
-            var wallName = (string)inputs[0].Value;
+            var wallType = (WallType)inputs[0].Value;
             var curve = (Curve)inputs[1].Value;
             var level = (Level)inputs[2].Value;
             var height = (double)inputs[3].Value;
             var offset = (double)inputs[4].Value;
             var flip = (bool)inputs[5].Value;
             var structural = (bool)inputs[6].Value;
-
-            var wallType = new FilteredElementCollector(doc)
-                .OfClass(typeof(WallType))
-                .FirstOrDefault(w => w.Name.Equals(wallName));
-            var wallTypeId = ((WallType)wallType).Id;
+            var wallTypeId = wallType.Id;
             var levelId = level.Id;
 
             using (Transaction transaction = new Transaction(doc, "Создание стены"))

@@ -9,7 +9,7 @@ using System.Linq;
 namespace NVP_Libs.Revit.Architecture
 {
     [NodeInput("контур", typeof(List<Curve>))]
-    [NodeInput("тип крыши", typeof(string))]
+    [NodeInput("тип крыши", typeof(RoofType))]
     [NodeInput("уровень", typeof(Level))]
     public class CreateRoof : INode
     {
@@ -18,18 +18,13 @@ namespace NVP_Libs.Revit.Architecture
             var doc = (context.GetCADContext() as ExternalCommandData).Application.ActiveUIDocument.Document;
 
             var curves = (inputs[0].Value as IEnumerable<object>).Cast<Curve>().ToList();
-            var roofTypeName = (string)inputs[1].Value;
+            var roofType = (RoofType)inputs[1].Value;
             var level = (Level)inputs[2].Value;
             CurveArray footPrint = new CurveArray();
             for (int i = 0; i < curves.Count; i++)
             {
                 footPrint.Append(curves[i]);
             }
-
-            RoofType roofType = new FilteredElementCollector(doc)
-                .OfClass(typeof(RoofType))
-                .OfType<RoofType>()
-                .FirstOrDefault(f => f.Name == roofTypeName);
 
             using (Transaction transaction = new Transaction(doc, "Создание крыши"))
             {
