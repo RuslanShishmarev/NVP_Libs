@@ -94,6 +94,7 @@
     <Compile Include="Common\PlaceFamilyInstanceXYZ.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ConvertNVPToRevit.cs" />
+    <Compile Include="Services\CurveService.cs" />
     <Compile Include="Structure\CreateBeamSystemByLevelInt.cs" />
     <Compile Include="Structure\CreateBeamSystemByLevelVector.cs" />
     <Compile Include="Structure\Create2DBeamSystem.cs" />

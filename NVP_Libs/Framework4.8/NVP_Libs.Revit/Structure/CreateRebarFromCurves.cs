@@ -16,8 +16,10 @@ namespace NVP_Libs.Revit.Structure
     [NodeInput("стандартный стержень", typeof(bool))]
     [NodeInput("элемент", typeof(Element))]
     [NodeInput("нормаль", typeof(RevitXYZ))]
-    [NodeInput("отгиб 1", typeof(List<object>))]
-    [NodeInput("отгиб 2", typeof(List<object>))]
+    [NodeInput("тип отгиба 1", typeof(RebarHookType))]
+    [NodeInput("лево/право", typeof(bool))]
+    [NodeInput("тип отгиба 2", typeof(RebarHookType))]
+    [NodeInput("лево/право", typeof(bool))]
 
     public class CreateRebarFromCurves : INode
     {
@@ -35,12 +37,20 @@ namespace NVP_Libs.Revit.Structure
             }
             var host = (Element)inputs[3].Value;
             var norm = (RevitXYZ)inputs[4].Value;
-            var list1 = (inputs[5].Value as IEnumerable<object>).Cast<object>().ToList();
-            var list2 = (inputs[6].Value as IEnumerable<object>).Cast<object>().ToList();
-            RebarHookType startHook = list1[0] as RebarHookType;
-            RebarHookType endHook = list2[0] as RebarHookType;
-            RebarHookOrientation startOrient = (RebarHookOrientation)list1[1];
-            RebarHookOrientation endOrient = (RebarHookOrientation)list2[1];
+            var startHook = (RebarHookType)inputs[5].Value;
+            var endHook = (RebarHookType)inputs[7].Value;
+            var startOrientBool = (bool)inputs[6].Value;
+            var endOrientBool = (bool)inputs[8].Value;
+            RebarHookOrientation startOrient = RebarHookOrientation.Right;
+            RebarHookOrientation endOrient = RebarHookOrientation.Right;
+            if (startOrientBool)
+            {
+                startOrient = RebarHookOrientation.Left;
+            }
+            if (endOrientBool)
+            {
+                endOrient = RebarHookOrientation.Left;
+            }
 
             using (Transaction transaction = new Transaction(doc, "Создание арматуры по кривым"))
             {
