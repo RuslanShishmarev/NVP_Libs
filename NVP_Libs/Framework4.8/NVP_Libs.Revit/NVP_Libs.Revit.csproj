@@ -39,15 +39,11 @@
     <Reference Include="NVP.API">
       <HintPath>..\..\..\..\..\..\..\..\Program Files\NVP\framework4.8\NVP.API.dll</HintPath>
     </Reference>
-    <Reference Include="RevitAPI, Version=21.0.0.0, Culture=neutral, processorArchitecture=AMD64">
-      <HintPath>..\..\packages\Revit_All_Main_Versions_API_x64.2021.1.4\lib\net48\RevitAPI.dll</HintPath>
-      <SpecificVersion>False</SpecificVersion>
-      <Private>False</Private>
+    <Reference Include="RevitAPI">
+      <HintPath>..\..\..\..\..\..\..\..\Program Files\Autodesk\Revit 2024\RevitAPI.dll</HintPath>
     </Reference>
-    <Reference Include="RevitAPIUI, Version=21.0.0.0, Culture=neutral, processorArchitecture=AMD64">
-      <HintPath>..\..\packages\Revit_All_Main_Versions_API_x64.2021.1.4\lib\net48\RevitAPIUI.dll</HintPath>
-      <SpecificVersion>False</SpecificVersion>
-      <Private>False</Private>
+    <Reference Include="RevitAPIUI">
+      <HintPath>..\..\..\..\..\..\..\..\Program Files\Autodesk\Revit 2024\RevitAPIUI.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -67,6 +63,9 @@
     <Compile Include="Architecture\CreateRoomByLevel.cs" />
     <Compile Include="Architecture\CreateRoomPlanCircuit.cs" />
     <Compile Include="Architecture\CreateRoomSeparator.cs" />
+    <Compile Include="Architecture\GetFloorTypeByName.cs" />
+    <Compile Include="Architecture\GetRoofTypeByName.cs" />
+    <Compile Include="Architecture\GetWallTypeByName.cs" />
     <Compile Include="Common\ChangeParameter.cs" />
     <Compile Include="Architecture\CreateDefaultWallNonRectangular.cs" />
     <Compile Include="Architecture\CreateDefaultWallRectengular.cs" />
@@ -95,6 +94,19 @@
     <Compile Include="Common\PlaceFamilyInstanceXYZ.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ConvertNVPToRevit.cs" />
+    <Compile Include="Services\CurveService.cs" />
+    <Compile Include="Structure\CreateBeamSystemByLevelInt.cs" />
+    <Compile Include="Structure\CreateBeamSystemByLevelVector.cs" />
+    <Compile Include="Structure\Create2DBeamSystem.cs" />
+    <Compile Include="Structure\CreateRebarFreeForm.cs" />
+    <Compile Include="Structure\CreateRebarFreeFormCurveLoop.cs" />
+    <Compile Include="Structure\CreateRebarFromCurvesAndShape.cs" />
+    <Compile Include="Structure\CreateRebarFromCurves.cs" />
+    <Compile Include="Structure\CreateWallFoundation.cs" />
+    <Compile Include="Structure\GetBarTypeByName.cs" />
+    <Compile Include="Structure\GetWallFoundationType.cs" />
+    <Compile Include="Structure\SetHook.cs" />
+    <Compile Include="Structure\GetRebarShapeByName.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitignore" />

@@ -9,7 +9,7 @@ using System.Linq;
 namespace NVP_Libs.Revit.Architecture
 {
     [NodeInput("профиль", typeof(List<Curve>))]
-    [NodeInput("тип стены", typeof(string))]
+    [NodeInput("тип стены", typeof(WallType))]
     [NodeInput("уровень", typeof(Level))]
     [NodeInput("несущая", typeof(bool))]
     public class CreateWallNonRectangular : INode
@@ -19,14 +19,9 @@ namespace NVP_Libs.Revit.Architecture
             var doc = (context.GetCADContext() as ExternalCommandData).Application.ActiveUIDocument.Document;
 
             var profile = (inputs[0].Value as IEnumerable<object>).Cast<Curve>().ToList();
-            var wallTypeName = (string)inputs[1].Value;
+            var wallType = (WallType)inputs[1].Value;
             var levelId = (inputs[2].Value as Element).Id;
             var structural = (bool)inputs[3].Value;
-
-            WallType wallType = new FilteredElementCollector(doc)
-                .OfClass(typeof(WallType))
-                .OfType<WallType>()
-                .FirstOrDefault(f => f.Name == wallTypeName);
             var wallTypeId = wallType.Id;
 
             using (Transaction transaction = new Transaction(doc, "Создание стены"))

@@ -8,13 +8,13 @@ using System.Linq;
 
 using RevitXYZ = Autodesk.Revit.DB.XYZ;
 
-namespace NVP_Libs.Revit.Architecture
+namespace NVP_Libs.Revit.Structure
 {
     [NodeInput("профиль", typeof(List<Curve>))]
     [NodeInput("уровень", typeof(Level))]
     [NodeInput("направление", typeof(RevitXYZ))]
     [NodeInput("3D", typeof(bool))]
-    public class CreateBeamSystem : INode
+    public class CreateBeamSystemByLevelVector : INode
     {
         public NodeResult Execute(INVPData context, List<NodeResult> inputs)
         {
@@ -25,7 +25,7 @@ namespace NVP_Libs.Revit.Architecture
             var direction = (RevitXYZ)inputs[2].Value;
             var is3D = (bool)inputs[3].Value;
 
-            using (Transaction transaction = new Transaction(doc, "Создание балочной системы"))
+            using (Transaction transaction = new Transaction(doc, "Создание балочной системы по уровню и вектору"))
             {
                 transaction.Start();
                 BeamSystem beamSystem = BeamSystem.Create(doc, profile, level, direction, is3D);
