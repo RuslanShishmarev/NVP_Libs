@@ -15,8 +15,9 @@ namespace NVP_Libs.Revit.Architecture
         {
             var doc = (context.GetCADContext() as ExternalCommandData).Application.ActiveUIDocument.Document;
             var level = (Level)inputs[0].Value;
-
-            using (Transaction transaction = new Transaction(doc, "Создание помещения по контуру плана"))
+            List<Room> rooms = new List<Room>();
+           
+            using (Transaction transaction = new Transaction(doc, "Создание помещений по контуру плана"))
             {
                 transaction.Start();
                 PlanCircuit planCircuit = null;
@@ -24,16 +25,16 @@ namespace NVP_Libs.Revit.Architecture
 
                 foreach (PlanCircuit circuit in planTopology.Circuits)
                 {
-                    if (circuit != null)
+                    if (circuit != null && !circuit.IsRoomLocated)
                     {
                         planCircuit = circuit;
-                        break;
+                        Room room = null;
+                        Room newRoom = doc.Create.NewRoom(room, planCircuit);
+                        rooms.Add(newRoom);
                     }
                 }
-                Room room = null;
-                Room newRoom = doc.Create.NewRoom(room, planCircuit);
                 transaction.Commit();
-                return new NodeResult(newRoom);
+                return new NodeResult(rooms);
             }
         }
     }
